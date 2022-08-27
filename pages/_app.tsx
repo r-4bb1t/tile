@@ -1,5 +1,9 @@
 import "styles/taiwindcss.css";
 import "styles/globals.css";
+
+import "react-grid-layout/css/styles.css";
+import "react-resizable/css/styles.css";
+
 import { useEffect } from "react";
 import getConfig from "next/config";
 import type { AppProps } from "next/app";

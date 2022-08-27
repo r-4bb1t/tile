@@ -383,6 +383,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-grid-layout@npm:^1.3.2":
+  version: 1.3.2
+  resolution: "@types/react-grid-layout@npm:1.3.2"
+  dependencies:
+    "@types/react": "*"
+  checksum: 190492acb69186c651bb99f19028dcd4c65129eae7de6efd41f51b6a6711af490e7b99ad7156b8731b11ecf2ec7c22bcf13c782bfe65be4b4e5c3362b97095bf
+  languageName: node
+  linkType: hard
+
 "@types/react-redux@npm:^7.1.20":
   version: 7.1.24
   resolution: "@types/react-redux@npm:7.1.24"
@@ -820,6 +829,13 @@ __metadata:
   version: 1.0.2
   resolution: "balanced-match@npm:1.0.2"
   checksum: 9706c088a283058a8a99e0bf91b0a2f75497f185980d9ffa8b304de1d9e58ebda7c72c07ebf01dadedaac5b2907b2c6f566f660d62bd336c3468e960403b9d65
+  languageName: node
+  linkType: hard
+
+"batch-processor@npm:1.0.0":
+  version: 1.0.0
+  resolution: "batch-processor@npm:1.0.0"
+  checksum: 5519b024f6cd0e95a543bb3edf0ae19e5badae0c32b30b41839b4469bbb1f91e14fc04bff3759cd9c2621aa9e16def48c938783e9027e7ec977fba62d537a468
   languageName: node
   linkType: hard
 
@@ -1456,6 +1472,15 @@ __metadata:
   version: 1.4.103
   resolution: "electron-to-chromium@npm:1.4.103"
   checksum: ae5783cafb1f49e92946416fafc5af45d85e5a6847ce00f4cf4b4d2e54bca1d27b26699ea2cedf5b700c1a0190329e7ec20dc06198daa9f0c343044bc074ae75
+  languageName: node
+  linkType: hard
+
+"element-resize-detector@npm:^1.2.2":
+  version: 1.2.4
+  resolution: "element-resize-detector@npm:1.2.4"
+  dependencies:
+    batch-processor: 1.0.0
+  checksum: 81c47b7e229c303889d3a9d78ec3f3232e88a6682f1e2424fb0632d9b4f503b2ca011e6954321060604da07749a5a972b6a175fdf6c6806093a3b80a304cde7b
   languageName: node
   linkType: hard
 
@@ -2469,6 +2494,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"invariant@npm:^2.2.4":
+  version: 2.2.4
+  resolution: "invariant@npm:2.2.4"
+  dependencies:
+    loose-envify: ^1.0.0
+  checksum: cc3182d793aad82a8d1f0af697b462939cb46066ec48bbf1707c150ad5fad6406137e91a262022c269702e01621f35ef60269f6c0d7fd178487959809acdfb14
+  languageName: node
+  linkType: hard
+
 "ip@npm:^1.1.5":
   version: 1.1.5
   resolution: "ip@npm:1.1.5"
@@ -2840,6 +2874,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.isequal@npm:^4.0.0":
+  version: 4.5.0
+  resolution: "lodash.isequal@npm:4.5.0"
+  checksum: da27515dc5230eb1140ba65ff8de3613649620e8656b19a6270afe4866b7bd461d9ba2ac8a48dcc57f7adac4ee80e1de9f965d89d4d81a0ad52bb3eec2609644
+  languageName: node
+  linkType: hard
+
 "lodash.merge@npm:^4.6.2":
   version: 4.6.2
   resolution: "lodash.merge@npm:4.6.2"
@@ -2847,7 +2888,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loose-envify@npm:^1.1.0, loose-envify@npm:^1.4.0":
+"loose-envify@npm:^1.0.0, loose-envify@npm:^1.1.0, loose-envify@npm:^1.4.0":
   version: 1.4.0
   resolution: "loose-envify@npm:1.4.0"
   dependencies:
@@ -3170,6 +3211,7 @@ __metadata:
     "@types/react": 17.0.43
     "@types/react-beautiful-dnd": ^13.1.2
     "@types/react-dom": 17.0.14
+    "@types/react-grid-layout": ^1.3.2
     "@types/react-resizable": ^3.0.2
     autoprefixer: ^10.4.4
     axios: ^0.26.1
@@ -3191,7 +3233,9 @@ __metadata:
     react: 18.0.0
     react-beautiful-dnd: ^13.1.0
     react-dom: 18.0.0
+    react-grid-layout: ^1.3.4
     react-resizable: ^3.0.4
+    react-sizeme: ^3.0.2
     tailwindcss: ^3.0.23
     typescript: ^4.6.0
     vercel: ^24.0.1
@@ -3754,7 +3798,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-draggable@npm:^4.0.3":
+"react-draggable@npm:^4.0.0, react-draggable@npm:^4.0.3":
   version: 4.4.5
   resolution: "react-draggable@npm:4.4.5"
   dependencies:
@@ -3764,6 +3808,22 @@ __metadata:
     react: ">= 16.3.0"
     react-dom: ">= 16.3.0"
   checksum: 21c3775db086e13020967627c20acd41d1ddbc7c7d7fca51491a5bbb54a0aa7e1730a4bc9af17141eb50a4954e547a5e25b2368f5f54b70db6f2686a897bacf2
+  languageName: node
+  linkType: hard
+
+"react-grid-layout@npm:^1.3.4":
+  version: 1.3.4
+  resolution: "react-grid-layout@npm:1.3.4"
+  dependencies:
+    clsx: ^1.1.1
+    lodash.isequal: ^4.0.0
+    prop-types: ^15.8.1
+    react-draggable: ^4.0.0
+    react-resizable: ^3.0.4
+  peerDependencies:
+    react: ">= 16.3.0"
+    react-dom: ">= 16.3.0"
+  checksum: f56c8c452acd9588edf1dc6996a4ea14d9f669d77f6b2ebd50146eaeeb9325c83f5ca44b66bac2b8c24f9cb2ec7ed49396350435991255c3b31e21b8a2e3d243
   languageName: node
   linkType: hard
 
@@ -3811,6 +3871,18 @@ __metadata:
   peerDependencies:
     react: ">= 16.3"
   checksum: cbf86ad04be0f073102489ad25a2ba101779f0f00e580d48e1be73c4057c36a4e8ee8308b020ad3dd91555bb24082ceeef674d5035a38d33a2d43aed192db7fa
+  languageName: node
+  linkType: hard
+
+"react-sizeme@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "react-sizeme@npm:3.0.2"
+  dependencies:
+    element-resize-detector: ^1.2.2
+    invariant: ^2.2.4
+    shallowequal: ^1.1.0
+    throttle-debounce: ^3.0.1
+  checksum: 97cb852c24bbd50acb310da89df564e0d069415f6635676dae3d3bdc583ece88090c0f2ee88a6b0dc36d2793af4a11e83bf6bbb41b86225dd0cf338e8f7e8552
   languageName: node
   linkType: hard
 
@@ -4046,6 +4118,13 @@ __metadata:
   version: 2.0.0
   resolution: "set-blocking@npm:2.0.0"
   checksum: 6e65a05f7cf7ebdf8b7c75b101e18c0b7e3dff4940d480efed8aad3a36a4005140b660fa1d804cb8bce911cac290441dc728084a30504d3516ac2ff7ad607b02
+  languageName: node
+  linkType: hard
+
+"shallowequal@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "shallowequal@npm:1.1.0"
+  checksum: f4c1de0837f106d2dbbfd5d0720a5d059d1c66b42b580965c8f06bb1db684be8783538b684092648c981294bf817869f743a066538771dbecb293df78f765e00
   languageName: node
   linkType: hard
 
@@ -4355,6 +4434,13 @@ __metadata:
   version: 0.2.0
   resolution: "text-table@npm:0.2.0"
   checksum: b6937a38c80c7f84d9c11dd75e49d5c44f71d95e810a3250bd1f1797fc7117c57698204adf676b71497acc205d769d65c16ae8fa10afad832ae1322630aef10a
+  languageName: node
+  linkType: hard
+
+"throttle-debounce@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "throttle-debounce@npm:3.0.1"
+  checksum: e34ef638e8df3a9154249101b68afcbf2652a139c803415ef8a2f6a8bc577bcd4d79e4bb914ad3cd206523ac78b9fb7e80885bfa049f64fbb1927f99d98b5736
   languageName: node
   linkType: hard
 

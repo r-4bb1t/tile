@@ -9,23 +9,3 @@
 .keep-all {
   word-break: keep-all;
 }
-
-.react-resizable {
-  position: relative;
-}
-
-.react-resizable-handle {
-  position: absolute;
-  width: 0.25rem;
-  top: 4rem;
-  bottom: 2rem;
-  right: 0.65rem;
-  background-color: black;
-  opacity: 0.2;
-  padding: 0 3px 3px 0;
-  background-repeat: no-repeat;
-  background-origin: content-box;
-  box-sizing: border-box;
-  cursor: w-resize;
-  border-radius: 9999px;
-}
