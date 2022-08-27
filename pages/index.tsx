@@ -94,7 +94,15 @@ const Home: NextPage = () => {
               margin={[16, 16]}
               compactType="horizontal"
               containerPadding={[16, 16]}
-              style={{ width: "720px" }}
+              style={{
+                width: `${
+                  (griditems.reduce((max, obj) => (max.x + max.w < obj.x + obj.w ? obj : max)).x +
+                    griditems.reduce((max, obj) => (max.x + max.w < obj.x + obj.w ? obj : max)).w) *
+                    176 +
+                  16
+                }px`,
+              }}
+              useCSSTransforms={true}
             >
               {griditems.map((item) => (
                 <div key={item.i}>
