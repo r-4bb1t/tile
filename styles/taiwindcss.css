@@ -3,4 +3,7 @@
 @tailwind utilities;
 
 @layer components {
+  .panel-title {
+    @apply text-lg font-bold;
+  }
 }

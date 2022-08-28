@@ -10,6 +10,8 @@ interface UIContextProps {
   setTheme: Dispatch<SetStateAction<string[]>>;
   borderRadius: number;
   setBorderRadius: Dispatch<SetStateAction<number>>;
+  backdropFilter: string;
+  setBackdropFilter: Dispatch<SetStateAction<string>>;
 }
 
 export const UIContext = createContext<UIContextProps>({
@@ -21,6 +23,8 @@ export const UIContext = createContext<UIContextProps>({
   setTheme: () => {},
   borderRadius: 0,
   setBorderRadius: () => {},
+  backdropFilter: "none",
+  setBackdropFilter: () => {},
 });
 
 const UIContextProvider: FC = ({ children }) => {
@@ -28,10 +32,22 @@ const UIContextProvider: FC = ({ children }) => {
   const [margin, setMargin] = useState(8);
   const [theme, setTheme] = useState(THEME.monochrome);
   const [borderRadius, setBorderRadius] = useState(5);
+  const [backdropFilter, setBackdropFilter] = useState("none");
 
   return (
     <UIContext.Provider
-      value={{ uiMode, setUIMode, margin, setMargin, theme, setTheme, borderRadius, setBorderRadius }}
+      value={{
+        uiMode,
+        setUIMode,
+        margin,
+        setMargin,
+        theme,
+        setTheme,
+        borderRadius,
+        setBorderRadius,
+        backdropFilter,
+        setBackdropFilter,
+      }}
     >
       {children}
     </UIContext.Provider>

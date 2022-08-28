@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import cc from "classcat";
 import Tile from "components/Tile";
 import Header from "components/Header";
-import Panel from "components/Panel";
+import Panel from "components/panel";
 import { AnimatePresence } from "framer-motion";
 import GridLayout, { Layout } from "react-grid-layout";
 import { TileInterface } from "constants/tile";

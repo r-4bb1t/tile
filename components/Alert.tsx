@@ -83,7 +83,7 @@ export function Alert({ close, type, title, message }: IAlertProps) {
   useEffect(() => {
     const timeout = setTimeout(() => {
       close();
-    }, 5000);
+    }, 1000);
 
     return () => {
       clearTimeout(timeout);

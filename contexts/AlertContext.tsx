@@ -40,7 +40,7 @@ const AlertContextProvider: FC = ({ children }) => {
         close,
       }}
     >
-      <aside className={"fixed top-8 inset-x-4 container mx-auto flex flex-col gap-4"}>
+      <aside className={"fixed top-8 inset-x-4 container mx-auto flex flex-col gap-4 z-50"}>
         <AnimatePresence>
           {alerts.map(({ id, type, title, message }) => (
             <Alert key={id} type={type} title={title} message={message} close={() => close(id)} />

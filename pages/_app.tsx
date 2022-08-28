@@ -11,6 +11,7 @@ import AlertContextProvider from "contexts/AlertContext";
 import { resetServerContext } from "react-beautiful-dnd";
 import TileContextProvider from "contexts/TileContext";
 import UIContextProvider from "contexts/UIContext";
+import MessageContextProvider from "contexts/MessageContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { publicRuntimeConfig } = getConfig();
@@ -25,7 +26,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <UIContextProvider>
       <AlertContextProvider>
         <TileContextProvider>
-          <Component {...pageProps} />
+          <MessageContextProvider>
+            <Component {...pageProps} />
+          </MessageContextProvider>
         </TileContextProvider>
       </AlertContextProvider>
     </UIContextProvider>

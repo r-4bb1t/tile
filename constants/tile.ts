@@ -1,39 +1,48 @@
+import { CSSProperties } from "react";
 import { Layout } from "react-grid-layout";
 
-interface DefaultType {
-  style: Object;
+interface DefaultAssetType {
+  style: CSSProperties;
   type: string;
 }
 
-export interface StringType extends DefaultType {
+export interface StringType extends DefaultAssetType {
   str: string;
   type: "string";
 }
 
-export interface ImageType extends DefaultType {
+export interface ImageType extends DefaultAssetType {
   url: string;
   type: "image";
 }
 
-export interface CommitType extends DefaultType {
+export interface CommitType extends DefaultAssetType {
   id: string;
   type: "commit";
 }
 
-export interface SolvedacType extends DefaultType {
+export interface SolvedacType extends DefaultAssetType {
   id: string;
   type: "solvedac";
 }
 
-export interface ListType extends DefaultType {
-  items: string[];
+export interface ListType extends DefaultAssetType {
+  items: any[];
   type: "list";
 }
 
-export type TileType = StringType | ImageType | CommitType | SolvedacType | ListType;
+export interface GridType extends DefaultAssetType {
+  items: any[];
+  type: "grid";
+}
+
+export type TileAssetType = StringType | ImageType | CommitType | SolvedacType | ListType | GridType;
 
 export interface TileInterface extends Layout {
   background: string;
   type: string;
-  assets: TileType[];
+  assets: TileAssetType[];
+
+  minW?: number;
+  minH?: number;
 }

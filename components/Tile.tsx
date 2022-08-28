@@ -1,14 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import cc from "classcat";
-import { TileInterface, TileType } from "constants/tile";
+import { TileInterface, TileAssetType } from "constants/tile";
 import { useUI } from "hooks/useUIContext";
 import Commits from "./Commits";
 import Solvedac from "./Solvedac";
+import { PlusIcon } from "./Icons";
 
-const AssetToComponent = (asset: TileType, index: number, size: number[]) => {
+const AssetToComponent = (asset: TileAssetType, index: number, size: number[], isUIList: boolean) => {
   const [value, setValue] = useState("");
-  const { uiMode } = useUI();
+  const { uiMode, borderRadius } = useUI();
   const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -17,18 +18,27 @@ const AssetToComponent = (asset: TileType, index: number, size: number[]) => {
 
   switch (asset.type) {
     case "image":
-      return <img src={asset.url} className="object-cover" alt="image" key={"image" + index} />;
+      return (
+        <img
+          src={asset.url}
+          className="w-full h-full object-cover"
+          alt="image"
+          key={"image" + index}
+          style={{
+            borderRadius: `${borderRadius}px`,
+          }}
+        />
+      );
     case "string":
       return (
-        <div className="p-2 flex items-center" key={"string" + index}>
+        <div className="p-2 flex items-center" key={"string" + index} style={asset.style}>
           <div
             className={cc([
               "w-full h-min outline-none py-1 px-2 resize-none overflow-hidden transition-all text-center",
               uiMode && "bg-white bg-opacity-20 focus:bg-opacity-50",
             ])}
-            contentEditable={uiMode}
+            contentEditable={uiMode && !isUIList}
             onChange={() => setValue(textRef.current!.innerText)}
-            style={asset.style}
             ref={textRef}
           >
             {value}
@@ -45,10 +55,33 @@ const AssetToComponent = (asset: TileType, index: number, size: number[]) => {
           {asset.items.map((item, i) => (
             <li
               key={i}
-              contentEditable={uiMode}
-              className={cc(["transition-all px-1 m-1", uiMode && "bg-white bg-opacity-20 focus:bg-opacity-50"])}
+              className={cc([
+                "relative transition-all px-1 m-1",
+                uiMode && "bg-white bg-opacity-20 focus:bg-opacity-50",
+              ])}
+            >
+              <div contentEditable={uiMode && typeof item === "string" && !isUIList} className="w-full outline-none">
+                {item}
+              </div>
+              {uiMode && <div className="absolute top-0 right-1">×</div>}
+            </li>
+          ))}
+        </ul>
+      );
+    case "grid":
+      return (
+        <ul className="grid justify-center" style={asset.style}>
+          {asset.items.map((item, i) => (
+            <li
+              key={i}
+              contentEditable={uiMode && typeof item === "string" && !isUIList}
+              className={cc([
+                "relative transition-all p-4 w-16 h-16 aspect-square m-1 flex items-center flex-shrink-0",
+                uiMode && "bg-white bg-opacity-20 focus:bg-opacity-50",
+              ])}
             >
               {item}
+              {uiMode && <div className="absolute top-0 right-1">×</div>}
             </li>
           ))}
         </ul>
@@ -58,23 +91,48 @@ const AssetToComponent = (asset: TileType, index: number, size: number[]) => {
   }
 };
 
-const Tile = ({ item, close }: { item: TileInterface; close: Function }) => {
-  const { borderRadius } = useUI();
+const Tile = ({
+  item,
+  close = () => {},
+  isUIList = false,
+}: {
+  item: TileInterface;
+  close?: Function;
+  isUIList?: boolean;
+}) => {
+  const { borderRadius, backdropFilter } = useUI();
   return (
     <div
-      className={cc(["flex flex-col justify-center w-full h-full overflow-auto select-none"])}
+      className={cc([
+        "relative flex flex-col justify-center w-full h-full overflow-auto select-none",
+        isUIList && "w-28 h-28 group",
+      ])}
       style={{
         background: item.background,
         borderRadius: `${borderRadius}px`,
       }}
     >
-      <div className="flex justify-between px-2 py-1 absolute inset-x-0 top-0 text-white ui-only drop-shadow-md">
-        {item.type}
-        <button type="button" className="" onClick={() => close()}>
-          ×
-        </button>
+      <div className="absolute inset-0 tile-mask" style={{ backdropFilter, borderRadius: `${borderRadius}px` }}></div>
+      <div className="absolute inset-0 flex flex-col justify-center">
+        {item.assets.map((asset, index) => AssetToComponent(asset, index, [item.w, item.h], isUIList))}
       </div>
-      {item.assets.map((asset, index) => AssetToComponent(asset, index, [item.w, item.h]))}
+      {isUIList ? (
+        <>
+          <div className="opacity-0 transition-opacity group-hover:opacity-80 absolute inset-0 bg-black bg-opacity-40 p-8">
+            <PlusIcon />
+          </div>
+          <div className="flex justify-center text-xs px-2 py-1 absolute inset-x-0 top-0 text-white ui-only drop-shadow-md">
+            {item.type}
+          </div>
+        </>
+      ) : (
+        <div className="flex justify-between px-2 py-1 absolute inset-x-0 top-0 text-white ui-only drop-shadow-md">
+          {item.type}
+          <button type="button" className="" onClick={() => close()}>
+            ×
+          </button>
+        </div>
+      )}
     </div>
   );
 };
