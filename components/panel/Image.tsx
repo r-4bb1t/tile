@@ -19,7 +19,7 @@ export default function Image() {
       assets: [
         {
           type: "image",
-          url: "https://avatars.githubusercontent.com/u/52532871?v=4",
+          url: "http://www.proedsolutions.com/wp-content/themes/micron/images/placeholders/placeholder_large_dark.jpg",
           style: {},
         },
       ],
@@ -30,13 +30,21 @@ export default function Image() {
       assets: [
         {
           type: "image",
-          url: "https://avatars.githubusercontent.com/u/52532871?v=4",
+          url: "http://www.proedsolutions.com/wp-content/themes/micron/images/placeholders/placeholder_large_dark.jpg",
           style: {},
         },
         {
           type: "string",
           str: "sample text",
-          style: { position: "absolute", inset: 0, display: "flex", justifyItems: "center", alignItems: "center" },
+          style: {
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            justifyItems: "center",
+            alignItems: "center",
+            fontWeight: 700,
+            color: "#ffffff",
+          },
         },
       ],
     },

@@ -1,4 +1,4 @@
-import { BACKDROP, BackdropList, THEME, ThemeList } from "constants/theme";
+import { BACKDROP, BackdropList, SHADOW, THEME, ThemeList } from "constants/theme";
 import { useUI } from "hooks/useUIContext";
 import cc from "classcat";
 import { useMessage } from "hooks/useMessageContext";
@@ -7,7 +7,8 @@ import { useCallback, useEffect, useState } from "react";
 import { useAlert } from "hooks/useAlertContext";
 
 export default function Home() {
-  const { borderRadius, setBorderRadius, theme, setTheme, backdropFilter, setBackdropFilter } = useUI();
+  const { borderRadius, setBorderRadius, theme, setTheme, backdropFilter, setBackdropFilter, shadow, setShadow } =
+    useUI();
   const { tiles, setTiles } = useTile();
   const { message } = useMessage();
   const { push } = useAlert();
@@ -113,6 +114,19 @@ export default function Home() {
               ></div>
             </li>
           </div>
+        ))}
+      </ul>
+      <div className="panel-title">Shadow</div>
+      <ul className="flex gap-2 flex-wrap">
+        {SHADOW.map((s) => (
+          <li
+            className={cc(["w-8 h-8", shadow === s && "border-4 border-black"])}
+            style={{ boxShadow: s, backgroundColor: theme[0] }}
+            key={s}
+            onClick={() => {
+              setShadow(s);
+            }}
+          ></li>
         ))}
       </ul>
     </>
