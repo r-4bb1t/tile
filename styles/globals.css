@@ -1,13 +1,49 @@
 @import url("//cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css");
 
-* {
-  box-sizing: border-box;
+@font-face {
+  font-family: "DungGeunMo";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "NotoSerifKR";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NotoSerifKR.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "GmarketSansMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "yg-jalnan";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
   font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
     "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
 }
 
+* {
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
 .keep-all {
   word-break: keep-all;
+}
+
+.react-grid-item:focus-within,
+.react-grid-item:focus,
+.react-grid-item:active,
+.react-grid-item:hover {
+  z-index: 10;
 }
 
 .react-resizable-handle {
@@ -40,4 +76,24 @@
 
 .tile-mask {
   mask: linear-gradient(transparent 30%, black 100%);
+}
+
+.pretendard {
+  font-family: "Pretendard";
+}
+
+.DungGeunMo {
+  font-family: "DungGeunMo";
+}
+
+.NotoSerifKR {
+  font-family: "NotoSerifKR";
+}
+
+.GmarketSansMedium {
+  font-family: "GmarketSansMedium";
+}
+
+.yg-jalnan {
+  font-family: "yg-jalnan";
 }

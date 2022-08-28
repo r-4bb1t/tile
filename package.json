@@ -25,6 +25,7 @@
     "next": "12.1.4",
     "react": "18.0.0",
     "react-beautiful-dnd": "^13.1.0",
+    "react-color-palette": "^6.2.0",
     "react-dom": "18.0.0",
     "react-grid-layout": "^1.3.4",
     "react-resizable": "^3.0.4",

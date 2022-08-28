@@ -141,7 +141,7 @@ const Tile = ({
           </div>
         </>
       ) : (
-        <div className="flex justify-between px-2 py-1 absolute inset-x-0 top-0 text-white ui-only drop-shadow-md">
+        <div className="draggable cursor-move flex justify-between px-2 py-1 absolute inset-x-0 top-0 text-white ui-only drop-shadow-md">
           {item.type}
           <button type="button" className="" onClick={() => close()}>
             ×

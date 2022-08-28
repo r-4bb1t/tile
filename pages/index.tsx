@@ -44,6 +44,7 @@ const Home: NextPage = () => {
                 overflow: "visible",
               }}
               useCSSTransforms={true}
+              draggableHandle=".draggable"
             >
               {tiles.map((item) => (
                 <div key={item.i}>

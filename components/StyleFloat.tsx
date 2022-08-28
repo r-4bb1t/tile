@@ -1,8 +1,10 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useTile } from "hooks/useTileContext";
-import { CSSProperties, useEffect, useRef } from "react";
+import { CSSProperties, useEffect, useRef, useState } from "react";
 import { AlignIcon } from "./Icons";
 import cc from "classcat";
+import { ColorPicker, useColor } from "react-color-palette";
+import "react-color-palette/lib/css/styles.css";
 
 export default function StyleFloat({
   type,
@@ -17,6 +19,17 @@ export default function StyleFloat({
 }) {
   const styleFloatRef = useRef<HTMLDivElement>(null);
   const { tiles, setTiles } = useTile();
+  const [isColorPickerOn, setIsColorPickerOn] = useState(false);
+
+  const getTileAttribute = (attribute: keyof CSSProperties) => {
+    return tiles.filter((tile) => tile.i === id)[0].assets[index].style[attribute] as any;
+  };
+
+  const [color, setColor] = useColor("hex", getTileAttribute("color") ?? "black");
+
+  useEffect(() => {
+    applyStyle({ color: color.hex });
+  }, [color]);
 
   useEffect(() => {
     document.addEventListener("mousedown", (e) => {
@@ -28,10 +41,6 @@ export default function StyleFloat({
         close();
     });
   }, []);
-
-  const getTileAttribute = (attribute: keyof CSSProperties) => {
-    return tiles.filter((tile) => tile.i === id)[0].assets[index].style[attribute] as any;
-  };
 
   const applyStyle = (style: CSSProperties) => {
     setTiles((tiles) =>
@@ -54,11 +63,40 @@ export default function StyleFloat({
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       exit={{ scale: 0, opacity: 0, transition: { duration: 0.2 } }}
-      className="absolute bottom-full text-left z-[100] -translate-y-3 origin-bottom bg-white p-4 drop-shadow-lg rounded flex justify-center text-sm gap-2"
+      className="pretendard absolute bottom-full text-black text-left z-[100] -translate-y-3 origin-bottom bg-white p-4 drop-shadow-lg rounded flex justify-center text-sm gap-2"
       ref={styleFloatRef}
     >
       {type === "string" && (
         <>
+          <div className="flex flex-col gap-1">
+            <div className="font-bold pl-1">Font</div>
+            <select
+              onChange={(e) => {
+                applyStyle(JSON.parse(e.target.value));
+              }}
+              defaultValue={JSON.stringify({
+                fontFamily: getTileAttribute("fontFamily") ?? "Pretendard",
+              })}
+              className="input input-xs input-bordered"
+            >
+              <option className="" value={JSON.stringify({ fontFamily: "Pretendard" })}>
+                Pretendard
+              </option>
+              <option className="NotoSerifKR" value={JSON.stringify({ fontFamily: "NotoSerifKR" })}>
+                NotoSerifKR
+              </option>
+              <option className="GmarketSansMedium" value={JSON.stringify({ fontFamily: "GmarketSansMedium" })}>
+                Gmarket Sans
+              </option>
+              <option className="yg-jalnan" value={JSON.stringify({ fontFamily: "yg-jalnan" })}>
+                여기어때 잘난체
+              </option>
+              <option className="DungGeunMo" value={JSON.stringify({ fontFamily: "DungGeunMo" })}>
+                둥근모
+              </option>
+            </select>
+          </div>
+
           <div className="flex flex-col gap-1">
             <div className="font-bold pl-1">Size</div>
             <select
@@ -146,10 +184,33 @@ export default function StyleFloat({
 
           <div className="flex flex-col gap-1">
             <div className="font-bold pl-1">color</div>
-            <div
+            <button
               className="w-6 h-6 rounded-full border-2 border-slate-300"
-              style={{ backgroundColor: getTileAttribute("color") }}
-            ></div>
+              style={{ backgroundColor: getTileAttribute("color") ?? "black" }}
+              onClick={() => {
+                setIsColorPickerOn((s) => !s);
+              }}
+            ></button>
+            <AnimatePresence>
+              {isColorPickerOn && (
+                <motion.div
+                  className="absolute top-16 z-[100] origin-top-left"
+                  initial={{ scale: 0.7, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.7, opacity: 0, transition: { duration: 0.2 } }}
+                >
+                  <ColorPicker
+                    width={300}
+                    color={color}
+                    hideHSV
+                    onChange={(e) => {
+                      setColor(e);
+                      applyStyle({ color: e.hex });
+                    }}
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </>
       )}

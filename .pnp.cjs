@@ -59,6 +59,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.6.2"],\
             ["react", "npm:18.0.0"],\
             ["react-beautiful-dnd", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:13.1.0"],\
+            ["react-color-palette", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:6.2.0"],\
             ["react-dom", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:18.0.0"],\
             ["react-grid-layout", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:1.3.4"],\
             ["react-resizable", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:3.0.4"],\
@@ -3960,6 +3961,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.6.2"],\
             ["react", "npm:18.0.0"],\
             ["react-beautiful-dnd", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:13.1.0"],\
+            ["react-color-palette", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:6.2.0"],\
             ["react-dom", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:18.0.0"],\
             ["react-grid-layout", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:1.3.4"],\
             ["react-resizable", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:3.0.4"],\
@@ -4659,6 +4661,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "@types/react-dom",\
             "@types/react",\
             "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-color-palette", [\
+        ["npm:6.2.0", {\
+          "packageLocation": "./.yarn/cache/react-color-palette-npm-6.2.0-aa10be947e-dd974763f1.zip/node_modules/react-color-palette/",\
+          "packageDependencies": [\
+            ["react-color-palette", "npm:6.2.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:6.2.0", {\
+          "packageLocation": "./.yarn/__virtual__/react-color-palette-virtual-ecd9720edf/0/cache/react-color-palette-npm-6.2.0-aa10be947e-dd974763f1.zip/node_modules/react-color-palette/",\
+          "packageDependencies": [\
+            ["react-color-palette", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:6.2.0"],\
+            ["@types/react", "npm:17.0.43"],\
+            ["react", "npm:18.0.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
             "react"\
           ],\
           "linkType": "HARD"\
