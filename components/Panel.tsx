@@ -8,9 +8,7 @@ export default function Panel() {
         animate={{ x: "2rem" }}
         exit={{ x: "100%", transition: { duration: 0.2 } }}
         className="w-[22rem] h-screen fixed top-0 right-0 bg-slate-400"
-      >
-        asdf
-      </motion.div>
+      ></motion.div>
     </div>
   );
 }

@@ -311,6 +311,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/date-fns@npm:^2.6.0":
+  version: 2.6.0
+  resolution: "@types/date-fns@npm:2.6.0"
+  dependencies:
+    date-fns: "*"
+  checksum: 6839db1d12d6586cd572e8aa77efc2ea88fd6566b7902641cf3efe2e22518aff067df2ba433539a275a3ab1169612b54d007ddcc2800d846be4f7e629cd7bfb3
+  languageName: node
+  linkType: hard
+
 "@types/hoist-non-react-statics@npm:^3.3.0":
   version: 3.3.1
   resolution: "@types/hoist-non-react-statics@npm:3.3.1"
@@ -1294,10 +1303,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^2.28.0":
-  version: 2.28.0
-  resolution: "date-fns@npm:2.28.0"
-  checksum: a0516b2e4f99b8bffc6cc5193349f185f195398385bdcaf07f17c2c4a24473c99d933eb0018be4142a86a6d46cb0b06be6440ad874f15e795acbedd6fd727a1f
+"date-fns@npm:*, date-fns@npm:^2.29.2":
+  version: 2.29.2
+  resolution: "date-fns@npm:2.29.2"
+  checksum: 08bebcceb0a5dbadae4c55e6592b9d5c07dbd7833433c7e9a1d4a424300db32589b8b48e5979b32863c9b00a48d9bab6663e580c2a4f9f203d46cbf9113b5664
   languageName: node
   linkType: hard
 
@@ -3207,6 +3216,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "nextjs-tailwindcss-template@workspace:."
   dependencies:
+    "@types/date-fns": ^2.6.0
     "@types/node": 17.0.23
     "@types/react": 17.0.43
     "@types/react-beautiful-dnd": ^13.1.2
@@ -3218,7 +3228,7 @@ __metadata:
     classcat: ^5.0.3
     cookies-next: ^2.0.4
     daisyui: ^2.13.6
-    date-fns: ^2.28.0
+    date-fns: ^2.29.2
     eslint: ^8.12.0
     eslint-config-next: 12.1.4
     eslint-config-prettier: ^8.5.0

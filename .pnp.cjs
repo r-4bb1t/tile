@@ -33,6 +33,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
+            ["@types/date-fns", "npm:2.6.0"],\
             ["@types/node", "npm:17.0.23"],\
             ["@types/react", "npm:17.0.43"],\
             ["@types/react-beautiful-dnd", "npm:13.1.2"],\
@@ -44,7 +45,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["classcat", "npm:5.0.3"],\
             ["cookies-next", "npm:2.0.4"],\
             ["daisyui", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:2.13.6"],\
-            ["date-fns", "npm:2.28.0"],\
+            ["date-fns", "npm:2.29.2"],\
             ["eslint", "npm:8.12.0"],\
             ["eslint-config-next", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:12.1.4"],\
             ["eslint-config-prettier", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:8.5.0"],\
@@ -426,6 +427,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-cookie-npm-0.4.1-274a704dc6-3275534ed6.zip/node_modules/@types/cookie/",\
           "packageDependencies": [\
             ["@types/cookie", "npm:0.4.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/date-fns", [\
+        ["npm:2.6.0", {\
+          "packageLocation": "./.yarn/cache/@types-date-fns-npm-2.6.0-516bcda282-6839db1d12.zip/node_modules/@types/date-fns/",\
+          "packageDependencies": [\
+            ["@types/date-fns", "npm:2.6.0"],\
+            ["date-fns", "npm:2.29.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -1597,10 +1608,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["date-fns", [\
-        ["npm:2.28.0", {\
-          "packageLocation": "./.yarn/cache/date-fns-npm-2.28.0-c19c5add1b-a0516b2e4f.zip/node_modules/date-fns/",\
+        ["npm:2.29.2", {\
+          "packageLocation": "./.yarn/cache/date-fns-npm-2.29.2-da48c27e93-08bebcceb0.zip/node_modules/date-fns/",\
           "packageDependencies": [\
-            ["date-fns", "npm:2.28.0"]\
+            ["date-fns", "npm:2.29.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -3923,6 +3934,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["nextjs-tailwindcss-template", "workspace:."],\
+            ["@types/date-fns", "npm:2.6.0"],\
             ["@types/node", "npm:17.0.23"],\
             ["@types/react", "npm:17.0.43"],\
             ["@types/react-beautiful-dnd", "npm:13.1.2"],\
@@ -3934,7 +3946,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["classcat", "npm:5.0.3"],\
             ["cookies-next", "npm:2.0.4"],\
             ["daisyui", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:2.13.6"],\
-            ["date-fns", "npm:2.28.0"],\
+            ["date-fns", "npm:2.29.2"],\
             ["eslint", "npm:8.12.0"],\
             ["eslint-config-next", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:12.1.4"],\
             ["eslint-config-prettier", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:8.5.0"],\

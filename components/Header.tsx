@@ -1,6 +1,9 @@
+import { useUI } from "hooks/useUIContext";
 import { useEffect, useState } from "react";
 
-export default function Header({ uiMode, setUIMode }: { uiMode: boolean; setUIMode: Function }) {
+export default function Header() {
+  const { uiMode, setUIMode } = useUI();
+
   const toggleUIMode = () => {
     if (uiMode) {
       document.querySelectorAll(".ui-only").forEach((ui) => {
@@ -21,7 +24,7 @@ export default function Header({ uiMode, setUIMode }: { uiMode: boolean; setUIMo
 
   useEffect(() => {
     toggleUIMode();
-  }, [uiMode]);
+  }, [toggleUIMode, uiMode]);
 
   return (
     <div className="w-full">

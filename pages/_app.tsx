@@ -1,14 +1,16 @@
-import "styles/taiwindcss.css";
-import "styles/globals.css";
-
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
+
+import "styles/taiwindcss.css";
+import "styles/globals.css";
 
 import { useEffect } from "react";
 import getConfig from "next/config";
 import type { AppProps } from "next/app";
 import AlertContextProvider from "contexts/AlertContext";
 import { resetServerContext } from "react-beautiful-dnd";
+import TileContextProvider from "contexts/TileContext";
+import UIContextProvider from "contexts/UIContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { publicRuntimeConfig } = getConfig();
@@ -20,9 +22,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   resetServerContext();
 
   return (
-    <AlertContextProvider>
-      <Component {...pageProps} />
-    </AlertContextProvider>
+    <UIContextProvider>
+      <AlertContextProvider>
+        <TileContextProvider>
+          <Component {...pageProps} />
+        </TileContextProvider>
+      </AlertContextProvider>
+    </UIContextProvider>
   );
 }
 
