@@ -30,7 +30,7 @@ const TileContextProvider: FC = ({ children }) => {
       h: 1,
       background: theme[Math.floor(Math.random() * theme.length)],
       type: "Name",
-      assets: [{ type: "string", str: "John Doe", style: { fontWeight: 900, fontSize: "2rem" } }],
+      assets: [{ type: "string", str: "John Doe", style: { fontWeight: 900, fontSize: "2.25rem" } }],
     },
     {
       i: `i${new Date().getTime()}-1`,
@@ -73,7 +73,7 @@ const TileContextProvider: FC = ({ children }) => {
       background: theme[Math.floor(Math.random() * theme.length)],
       type: "List",
       assets: [
-        { type: "string", str: "List", style: { fontWeight: 800, fontSize: "1.2rem" } },
+        { type: "string", str: "List", style: { fontWeight: 700, fontSize: "1.25rem" } },
         { type: "list", items: ["item1", "item2", "item3"], style: { listStyleType: "disc" } },
       ],
     },

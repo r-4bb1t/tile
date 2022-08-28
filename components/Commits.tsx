@@ -7,9 +7,9 @@ const getColsBySize = (width: number) => {
     case 1:
       return 8;
     case 2:
-      return 24;
+      return 22;
     case 3:
-      return 38;
+      return 36;
     case 4:
       return 53;
     default:
@@ -83,7 +83,7 @@ export default function Commits({ id, size }: { id: string; size: number[] }) {
                       opacity: Math.min(1, Math.max(0, days.contributionCount / 10)),
                     }}
                   />
-                  <div className="absolute bottom-2 px-2 py-1 text-xs text-white flex flex-col items-center font-bold w-max text-center group-hover:opacity-100 opacity-0 transition-all bg-black bg-opacity-50 pointer-events-none rounded">
+                  <div className="absolute z-50 bottom-2 px-2 py-1 text-xs text-white flex flex-col items-center font-bold w-max text-center group-hover:opacity-100 opacity-0 transition-all bg-black bg-opacity-50 pointer-events-none rounded">
                     <div className="text-2xs leading-3 font-normal">
                       {format(new Date(new Date().getTime() - (ii * 7 + i) * 86400000), "MM-dd")}
                     </div>

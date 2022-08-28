@@ -28,7 +28,40 @@ export default function Home() {
       <ul className="flex flex-col">
         {(Object.keys(THEME) as ThemeList[]).map((palette) => (
           <>
-            <div className="font-semibold">{palette}</div>
+            <div className="font-semibold flex items-center">
+              {palette}
+              <button
+                className="w-4 h-4 p-1 mt-0.5"
+                onClick={() =>
+                  message({
+                    content: "Do you want to apply the theme palette to the current tiles?",
+                    buttonText: ["YES", "NO"],
+                    onClose: () => {
+                      setTheme(THEME[palette]);
+                      setTiles((tiles) =>
+                        tiles.map((tile, i) => {
+                          return {
+                            ...tile,
+                            background: THEME[palette][Math.floor(Math.random() * THEME[palette].length)],
+                          };
+                        }),
+                      );
+                      push({ type: "info", message: "Applied to all tiles." });
+                    },
+                  })
+                }
+              >
+                <svg
+                  id="Layer_1"
+                  data-name="Layer 1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 118.04 122.88"
+                  className="w-full aspect-square"
+                >
+                  <path d="M16.08,59.26A8,8,0,0,1,0,59.26a59,59,0,0,1,97.13-45V8a8,8,0,1,1,16.08,0V33.35a8,8,0,0,1-8,8L80.82,43.62a8,8,0,1,1-1.44-15.95l8-.73A43,43,0,0,0,16.08,59.26Zm22.77,19.6a8,8,0,0,1,1.44,16l-10.08.91A42.95,42.95,0,0,0,102,63.86a8,8,0,0,1,16.08,0A59,59,0,0,1,22.3,110v4.18a8,8,0,0,1-16.08,0V89.14h0a8,8,0,0,1,7.29-8l25.31-2.3Z"></path>
+                </svg>
+              </button>
+            </div>
             <li
               className={cc([
                 "flex w-min items-center p-1 bg-transparent mb-2",
@@ -42,10 +75,10 @@ export default function Home() {
                   buttonText: ["YES", "NO"],
                   onClose: () => {
                     setTiles((tiles) =>
-                      tiles.map((tile) => {
+                      tiles.map((tile, i) => {
                         return {
                           ...tile,
-                          background: THEME[palette][Math.floor(Math.random() * THEME[palette].length)],
+                          background: THEME[palette][i % THEME[palette].length],
                         };
                       }),
                     );

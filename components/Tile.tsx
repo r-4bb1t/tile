@@ -6,11 +6,14 @@ import { useUI } from "hooks/useUIContext";
 import Commits from "./Commits";
 import Solvedac from "./Solvedac";
 import { PlusIcon } from "./Icons";
+import StyleFloat from "./StyleFloat";
+import { AnimatePresence } from "framer-motion";
 
-const AssetToComponent = (asset: TileAssetType, index: number, size: number[], isUIList: boolean) => {
+const AssetToComponent = (asset: TileAssetType, index: number, size: number[], isUIList: boolean, id: string) => {
   const [value, setValue] = useState("");
   const { uiMode, borderRadius } = useUI();
   const textRef = useRef<HTMLDivElement>(null);
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     if (asset.type === "string") setValue(asset.str);
@@ -31,18 +34,22 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
       );
     case "string":
       return (
-        <div className="p-2 flex items-center" key={"string" + index} style={asset.style}>
+        <div className="relative p-2 flex items-center" key={"string" + index} style={asset.style}>
           <div
             className={cc([
-              "w-full h-min outline-none py-1 px-2 resize-none overflow-hidden transition-all text-center",
+              "w-full h-min outline-none py-1 px-2 resize-none overflow-hidden transition-all peer",
               uiMode && "bg-white bg-opacity-20 focus:bg-opacity-50",
             ])}
             contentEditable={uiMode && !isUIList}
             onChange={() => setValue(textRef.current!.innerText)}
             ref={textRef}
+            onFocus={() => setIsFocused(true)}
           >
             {value}
           </div>
+          <AnimatePresence>
+            {isFocused && <StyleFloat type="string" close={() => setIsFocused(false)} id={id} index={index} />}
+          </AnimatePresence>
         </div>
       );
     case "commit":
@@ -51,21 +58,29 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
       return <Solvedac id="r4bb1t" key={"solvedac" + index} />;
     case "list":
       return (
-        <ul className="pl-8 pr-2" style={asset.style}>
+        <ul className="relative pl-8 pr-2" style={asset.style}>
           {asset.items.map((item, i) => (
             <li
               key={i}
               className={cc([
-                "relative transition-all px-1 m-1",
-                uiMode && "bg-white bg-opacity-20 focus:bg-opacity-50",
+                "relative transition-all pl-1 pr-2 m-1",
+                uiMode && "bg-white bg-opacity-20 child-focus:bg-opacity-50",
               ])}
             >
-              <div contentEditable={uiMode && typeof item === "string" && !isUIList} className="w-full outline-none">
+              <div
+                contentEditable={uiMode && typeof item === "string" && !isUIList}
+                className="w-full outline-none"
+                onFocus={() => setIsFocused(true)}
+              >
                 {item}
               </div>
               {uiMode && <div className="absolute top-0 right-1">×</div>}
             </li>
           ))}
+
+          <AnimatePresence>
+            {isFocused && <StyleFloat type="string" close={() => setIsFocused(false)} id={id} index={index} />}
+          </AnimatePresence>
         </ul>
       );
     case "grid":
@@ -104,7 +119,7 @@ const Tile = ({
   return (
     <div
       className={cc([
-        "relative flex flex-col justify-center w-full h-full overflow-auto select-none",
+        "relative flex flex-col justify-center w-full h-full overflow-visible select-none",
         isUIList && "w-28 h-28 group",
       ])}
       style={{
@@ -114,7 +129,7 @@ const Tile = ({
     >
       <div className="absolute inset-0 tile-mask" style={{ backdropFilter, borderRadius: `${borderRadius}px` }}></div>
       <div className="absolute inset-0 flex flex-col justify-center">
-        {item.assets.map((asset, index) => AssetToComponent(asset, index, [item.w, item.h], isUIList))}
+        {item.assets.map((asset, index) => AssetToComponent(asset, index, [item.w, item.h], isUIList, item.i))}
       </div>
       {isUIList ? (
         <>

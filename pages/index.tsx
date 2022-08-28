@@ -23,7 +23,7 @@ const Home: NextPage = () => {
     <div className="min-h-screen w-full overflow-x-hidden flex flex-col h-full">
       <Header />
       <div className="flex w-full h-full flex-1 items-center">
-        <div className="flex flex-col w-full h-full justify-center items-center overflow-x-auto flex-[2]">
+        <div className="flex flex-col w-full h-full justify-center items-center overflow-visible flex-[2]">
           {winReady && (
             <GridLayout
               layout={tiles}
@@ -41,6 +41,7 @@ const Home: NextPage = () => {
               style={{
                 width: `${4 * (margin + 160) + margin}px`,
                 background: uiMode ? "#f0f0f0" : "transparent",
+                overflow: "visible",
               }}
               useCSSTransforms={true}
             >
