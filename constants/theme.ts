@@ -3,10 +3,12 @@ export const THEME = {
   rainbow: ["#CC99C9", "#9EC1CF", "#9EE09E", "#FDFD97", "#FEB144", "#FF6663"],
   violet: ["#355070", "#6D597A", "#B56576", "#E56B6F", "#EAAC8B"],
   greenery: ["#5E7DC2", "#00A1DE", "#00C1D9", "#00DCB8", "#92EF8D"],
-  pink: ["#FF7D8C", "#D5586A", "#AD3349", "#85002B", "#5E000F"],
+  pink: ["#ffa8a8", "#f09090", "#ffc0c0", "#ffd8d8"],
+  silver: ["#c0c0c0", "	#f0d8d8", "#f0c0c0", "#a8a8a8"],
+  peach: ["#fffec5", "#feeeb1", "#ffd8a1", "#ffcb9b", "#ffbb9a"],
 };
 
-export type ThemeList = "monochrome" | "rainbow" | "violet" | "greenery" | "pink";
+export type ThemeList = "monochrome" | "rainbow" | "green" | "greenery" | "pink" | "silver" | "peach";
 
 export const BACKDROP = {
   none: "none",

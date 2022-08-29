@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { forwardRef, useEffect, useRef, useState } from "react";
+import React, { Dispatch, forwardRef, ReactNode, SetStateAction, useEffect, useRef, useState } from "react";
 import cc from "classcat";
 import { TileInterface, TileAssetType, IconType, SolvedacType, ImageType, GridType, ListType } from "constants/tile";
 import { useUI } from "hooks/useUIContext";
@@ -14,6 +14,30 @@ import AddGridItem from "./AddGridItem";
 const getMinColumn = (length: number, floor: number, ceil: number) => {
   if (Math.ceil(length / floor) * floor >= Math.ceil(length / ceil) * ceil) return ceil;
   return floor;
+};
+
+const TileIcon = ({
+  children,
+  id,
+  index,
+  itemIndex,
+}: {
+  children: ReactNode;
+  id: string;
+  index: number;
+  itemIndex: number;
+}) => {
+  const [isFocused, setIsFocused] = useState(false);
+  return (
+    <div className="flex items-center justify-center w-full h-full" onClick={() => setIsFocused(true)}>
+      {children}
+      <AnimatePresence>
+        {isFocused && (
+          <StyleFloat type="gridIcon" close={() => setIsFocused(false)} id={id} index={index} itemIndex={itemIndex} />
+        )}
+      </AnimatePresence>
+    </div>
+  );
 };
 
 const AssetToComponent = (asset: TileAssetType, index: number, size: number[], isUIList: boolean, id: string) => {
@@ -49,6 +73,7 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
             className={cc([
               "w-full h-min outline-none py-1 px-2 resize-none overflow-hidden transition-all peer",
               uiMode && !isUIList && "bg-white bg-opacity-20 focus:bg-opacity-50",
+              isUIList && "!text-xs",
             ])}
             contentEditable={uiMode && !isUIList}
             suppressContentEditableWarning
@@ -67,7 +92,10 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
       return <Commits id="r-4bb1t" size={size} key={"commit" + index} />;
     case "solvedac":
       return (
-        <div className="w-full h-full flex items-center justify-center p-10" key={"solvedac" + index}>
+        <div
+          className={cc(["w-full h-full flex items-center justify-center p-10", isUIList && "!p-4"])}
+          key={"solvedac" + index}
+        >
           <Solvedac id="r4bb1t" key={"solvedac" + index} itemType={asset.itemType} isUiList={isUIList} />
         </div>
       );
@@ -80,6 +108,7 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
               className={cc([
                 "relative transition-all pl-1 pr-2 m-1",
                 uiMode && !isUIList && "bg-white bg-opacity-20 child-focus:bg-opacity-50",
+                isUIList && "!text-xs",
               ])}
             >
               <div
@@ -99,7 +128,7 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
                         if (tile.i === id) {
                           return {
                             ...tile,
-                            assets: tile.assets.map((asset: ListType, i) => {
+                            assets: (tile.assets as ListType[]).map((asset, i) => {
                               if (i === index)
                                 return { ...asset, items: asset.items.filter((item, i) => i !== itemIndex) };
                               return asset;
@@ -128,7 +157,7 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
                       if (tile.i === id) {
                         return {
                           ...tile,
-                          assets: tile.assets.map((asset: ListType, i) => {
+                          assets: (tile.assets as ListType[]).map((asset, i) => {
                             if (i === index) return { ...asset, items: [...asset.items, ""] };
                             return asset;
                           }),
@@ -151,9 +180,11 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
       );
     case "grid":
       return (
-        <div className="w-full h-full flex items-center justify-center" key={"grid" + index}>
+        <div className="w-full h-full flex-shrink flex items-center justify-center min-h-0" key={"grid" + index}>
           <div
-            className="grid w-fit h-full justify-center justify-items-center items-center gap-2 p-2 flex-grow-0"
+            className={cc([
+              "grid w-fit h-full justify-center justify-items-center items-center gap-2 p-4 flex-grow-0 flex-shrink",
+            ])}
             style={{
               ...asset.style,
               gridTemplateColumns: `repeat(${getMinColumn(
@@ -173,12 +204,16 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
                   uiMode && !isUIList && "bg-white bg-opacity-20 focus:bg-opacity-50",
                 ])}
                 style={{
-                  padding: `${Math.max(size[0], size[1]) * 8}px`,
+                  padding: `${Math.max(size[0], size[1]) * 2}px`,
                 }}
               >
                 {
                   {
-                    icon: (item as IconType).icon,
+                    icon: (
+                      <TileIcon id={id} index={index} itemIndex={itemIndex}>
+                        {"icon" in item && item.icon({ ...(item as IconType).attributes })}
+                      </TileIcon>
+                    ),
                     solvedac: (
                       <Solvedac
                         id="r4bb1t"
@@ -214,7 +249,7 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
                           if (tile.i === id)
                             return {
                               ...tile,
-                              assets: tile.assets.map((asset: GridType, i) => {
+                              assets: (tile.assets as GridType[]).map((asset, i) => {
                                 if (i === index) {
                                   return { ...asset, items: asset.items.filter((item, ii) => ii !== itemIndex) };
                                 }
@@ -233,12 +268,36 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
             ))}
           </div>
           {uiMode && !isUIList && (
-            <div className="relative flex items-center justify-center px-2">
-              <button className="w-8 h-8 hover:opacity-50 transition-all" onClick={() => setIsGridModalOpen(true)}>
+            <div className="relative flex items-center justify-center">
+              <button
+                className="absolute right-2 w-8 h-8 hover:opacity-50 transition-all "
+                onClick={() => setIsGridModalOpen(true)}
+              >
                 <PlusIcon />
               </button>
               <AnimatePresence>
-                {isGridModalOpen && <AddGridItem close={() => setIsGridModalOpen(false)} />}
+                {isGridModalOpen && (
+                  <AddGridItem
+                    close={() => setIsGridModalOpen(false)}
+                    addItem={(newItem: TileAssetType) => {
+                      setTiles((tiles) =>
+                        tiles.map((tile) => {
+                          if (tile.i === id)
+                            return {
+                              ...tile,
+                              assets: (tile.assets as GridType[]).map((asset, i) => {
+                                if (i === index) {
+                                  return { ...asset, items: [...asset.items, newItem] };
+                                }
+                                return asset;
+                              }),
+                            };
+                          return tile;
+                        }),
+                      );
+                    }}
+                  />
+                )}
               </AnimatePresence>
             </div>
           )}
@@ -273,7 +332,7 @@ const Tile = ({
     <div
       className={cc([
         "relative flex flex-col justify-center w-full h-full overflow-visible select-none",
-        isUIList && "w-28 h-28 group",
+        isUIList && "w-24 h-24 group",
       ])}
       style={{
         background: item.background,

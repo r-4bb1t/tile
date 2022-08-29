@@ -5,17 +5,20 @@ import { AlignIcon } from "./Icons";
 import cc from "classcat";
 import { ColorPicker, useColor } from "react-color-palette";
 import "react-color-palette/lib/css/styles.css";
+import { GridType, IconType } from "constants/tile";
 
 export default function StyleFloat({
   type,
   close,
   id,
   index,
+  itemIndex,
 }: {
-  type: "string" | "icon";
+  type: "string" | "gridIcon" | "icon";
   close: Function;
   id: string;
   index: number;
+  itemIndex?: number;
 }) {
   const styleFloatRef = useRef<HTMLDivElement>(null);
   const { tiles, setTiles } = useTile();
@@ -25,10 +28,19 @@ export default function StyleFloat({
     return tiles.filter((tile) => tile.i === id)[0].assets[index].style[attribute] as any;
   };
 
-  const [color, setColor] = useColor("hex", getTileAttribute("color") ?? "black");
+  const getGridIconColor = () =>
+    ((tiles.filter((tile) => tile.i === id)[0].assets[index] as GridType).items[itemIndex!] as IconType).attributes
+      .color;
+
+  const [color, setColor] = useColor(
+    "hex",
+    (type === "gridIcon" ? getGridIconColor() : getTileAttribute("color")) ?? "black",
+  );
 
   useEffect(() => {
     applyStyle({ color: color.hex });
+    applyStyle({ fill: color.hex });
+    applyStyle({ stroke: color.hex });
   }, [color]);
 
   useEffect(() => {
@@ -42,20 +54,45 @@ export default function StyleFloat({
     });
   }, []);
 
-  const applyStyle = (style: CSSProperties) => {
-    setTiles((tiles) =>
-      tiles.map((tile) => {
-        if (tile.i === id)
-          return {
-            ...tile,
-            assets: tile.assets.map((asset, i) => {
-              if (i === index) return { ...asset, style: { ...asset.style, ...style } };
-              return asset;
-            }),
-          };
-        return tile;
-      }),
-    );
+  const applyStyle = (style: CSSProperties | Object) => {
+    if (type === "string")
+      setTiles((tiles) =>
+        tiles.map((tile) => {
+          if (tile.i === id)
+            return {
+              ...tile,
+              assets: tile.assets.map((asset, i) => {
+                if (i === index) return { ...asset, style: { ...asset.style, ...style } };
+                return asset;
+              }),
+            };
+          return tile;
+        }),
+      );
+    else if (type === "gridIcon")
+      setTiles((tiles) =>
+        tiles.map((tile) => {
+          if (tile.i === id)
+            return {
+              ...tile,
+              assets: (tile.assets as GridType[]).map((asset: GridType, i) => {
+                if (i === index)
+                  return {
+                    ...asset,
+                    items: asset.items.map((item, ii) => {
+                      if (ii === itemIndex) {
+                        //@ts-ignore
+                        return { ...item, attributes: { ...item.attributes, ...style } };
+                      }
+                      return item;
+                    }),
+                  };
+                return asset;
+              }),
+            };
+          return tile;
+        }),
+      );
   };
 
   return (
@@ -181,39 +218,39 @@ export default function StyleFloat({
               ))}
             </div>
           </div>
-
-          <div className="flex flex-col gap-1">
-            <div className="font-bold pl-1">color</div>
-            <button
-              className="w-6 h-6 rounded-full border-2 border-slate-300"
-              style={{ backgroundColor: getTileAttribute("color") ?? "black" }}
-              onClick={() => {
-                setIsColorPickerOn((s) => !s);
-              }}
-            ></button>
-            <AnimatePresence>
-              {isColorPickerOn && (
-                <motion.div
-                  className="absolute top-16 z-[100] origin-top-left"
-                  initial={{ scale: 0.7, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.7, opacity: 0, transition: { duration: 0.2 } }}
-                >
-                  <ColorPicker
-                    width={300}
-                    color={color}
-                    hideHSV
-                    onChange={(e) => {
-                      setColor(e);
-                      applyStyle({ color: e.hex });
-                    }}
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
         </>
       )}
+
+      <div className="flex flex-col gap-1">
+        <div className="font-bold pl-1">color</div>
+        <button
+          className="w-6 h-6 rounded-full border-2 border-slate-300"
+          style={{ backgroundColor: (type === "gridIcon" ? getGridIconColor() : getTileAttribute("color")) ?? "black" }}
+          onClick={() => {
+            setIsColorPickerOn((s) => !s);
+          }}
+        ></button>
+        <AnimatePresence>
+          {isColorPickerOn && (
+            <motion.div
+              className="absolute top-16 z-[100] origin-top-left"
+              initial={{ scale: 0.7, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.7, opacity: 0, transition: { duration: 0.2 } }}
+            >
+              <ColorPicker
+                width={300}
+                color={color}
+                hideHSV
+                onChange={(e) => {
+                  setColor(e);
+                  applyStyle({ color: e.hex });
+                }}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
       <div className="border-x-transparent border-x-8 border-t-8 border-t-white absolute -bottom-1 left-4 w-0 h-0" />
     </motion.div>

@@ -1,5 +1,6 @@
 import { CSSProperties } from "react";
 import { Layout } from "react-grid-layout";
+import { IconBaseProps } from "react-icons";
 
 interface DefaultAssetType {
   style: CSSProperties;
@@ -40,6 +41,7 @@ export interface GridType extends DefaultAssetType {
 export interface IconType extends DefaultAssetType {
   icon: any;
   type: "icon";
+  attributes: IconBaseProps;
 }
 
 export type TileAssetType = StringType | ImageType | CommitType | SolvedacType | ListType | GridType | IconType;

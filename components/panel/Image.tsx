@@ -8,8 +8,6 @@ import { TileInterface } from "constants/tile";
 
 export default function Image() {
   const { addTile } = useTile();
-  const { message } = useMessage();
-  const { push } = useAlert();
   const { theme } = useUI();
 
   const ItemList = [

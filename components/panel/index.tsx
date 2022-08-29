@@ -1,15 +1,17 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import cc from "classcat";
-import { HomeIcon, ImageIcon, SolvedacIcon } from "../Icons";
+import { HomeIcon, ImageIcon, ListIcon, SolvedacIcon } from "../Icons";
 import Home from "./home";
 import Image from "./Image";
 import Solvedac from "./Solvedac";
+import List from "./List";
 
 enum TAB {
   home,
   image,
   solvecac,
+  list,
 }
 
 export default function Panel() {
@@ -19,6 +21,7 @@ export default function Panel() {
     [TAB.home]: { icon: HomeIcon, component: <Home key="home" /> },
     [TAB.image]: { icon: ImageIcon, component: <Image key="image" /> },
     [TAB.solvecac]: { icon: SolvedacIcon, component: <Solvedac key="solvedac" /> },
+    [TAB.list]: { icon: ListIcon, component: <List key="list" /> },
   };
 
   return (
@@ -47,8 +50,8 @@ export default function Panel() {
             ))}
           </div>
         </div>
-        <div className="pr-8 w-full">
-          <div className="w-full flex flex-col p-4 gap-4">{TabItem[tab].component}</div>
+        <div className="pr-9 w-full">
+          <div className="w-full flex flex-col p-4 gap-4 h-screen overflow-y-auto panel">{TabItem[tab].component}</div>
         </div>
       </motion.div>
     </div>

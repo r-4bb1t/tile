@@ -43,7 +43,7 @@ html {
 .react-grid-item:focus,
 .react-grid-item:active,
 .react-grid-item:hover {
-  z-index: 10;
+  z-index: 100;
 }
 
 .react-resizable-handle {
@@ -70,7 +70,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #dfdfdf;
+  background-color: #ffffff88;
+  border-radius: 10px;
+}
+
+.panel::-webkit-scrollbar-thumb {
+  background-color: #47556988;
   border-radius: 10px;
 }
 
@@ -96,4 +101,10 @@ html {
 
 .yg-jalnan {
   font-family: "yg-jalnan";
+}
+
+@counter-style heart {
+  system: cyclic;
+  symbols: 🧡 💛 💚 💙 💜;
+  suffix: " ";
 }
