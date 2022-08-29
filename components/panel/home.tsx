@@ -17,7 +17,7 @@ export default function Home() {
     <>
       <div className="panel-title">Border Radius</div>
       <input
-        className="range range-xs w-full"
+        className="range range-xs flex-shrink-0 w-full"
         type="range"
         step={4}
         min={0}

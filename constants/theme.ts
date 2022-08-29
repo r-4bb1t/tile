@@ -8,7 +8,7 @@ export const THEME = {
   peach: ["#fffec5", "#feeeb1", "#ffd8a1", "#ffcb9b", "#ffbb9a"],
 };
 
-export type ThemeList = "monochrome" | "rainbow" | "green" | "greenery" | "pink" | "silver" | "peach";
+export type ThemeList = "monochrome" | "rainbow" | "violet" | "greenery" | "pink" | "silver" | "peach";
 
 export const BACKDROP = {
   none: "none",
