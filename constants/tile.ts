@@ -24,6 +24,7 @@ export interface CommitType extends DefaultAssetType {
 export interface SolvedacType extends DefaultAssetType {
   id: string;
   type: "solvedac";
+  itemType: "tier" | "badge" | "class" | "profile";
 }
 
 export interface ListType extends DefaultAssetType {
@@ -32,11 +33,16 @@ export interface ListType extends DefaultAssetType {
 }
 
 export interface GridType extends DefaultAssetType {
-  items: any[];
+  items: TileAssetType[];
   type: "grid";
 }
 
-export type TileAssetType = StringType | ImageType | CommitType | SolvedacType | ListType | GridType;
+export interface IconType extends DefaultAssetType {
+  icon: any;
+  type: "icon";
+}
+
+export type TileAssetType = StringType | ImageType | CommitType | SolvedacType | ListType | GridType | IconType;
 
 export interface TileInterface extends Layout {
   background: string;

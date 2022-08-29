@@ -15,6 +15,7 @@ export interface CommitsResponse {
 }
 
 export interface SolvedacResponse {
+  handle: string;
   badge: {
     badgeImageUrl: string;
     displayDescription: string;
@@ -25,4 +26,5 @@ export interface SolvedacResponse {
   exp: number;
   rating: number;
   tier: number;
+  profileImageUrl: string;
 }
