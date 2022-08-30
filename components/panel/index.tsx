@@ -1,16 +1,16 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import cc from "classcat";
-import { GithubIcon, HomeIcon, ImageIcon, ListIcon, SolvedacIcon } from "../Icons";
+import { GithubIcon, HomeIcon, BasicIcon, ListIcon, SolvedacIcon } from "../Icons";
 import Home from "./home";
-import Image from "./Image";
+import Basic from "./Basic";
 import Solvedac from "./Solvedac";
 import List from "./List";
 import Github from "./Github";
 
 enum TAB {
   home,
-  image,
+  basic,
   github,
   solvecac,
   list,
@@ -21,7 +21,7 @@ export default function Panel() {
 
   const TabItem = {
     [TAB.home]: { icon: HomeIcon, component: <Home key="home" /> },
-    [TAB.image]: { icon: ImageIcon, component: <Image key="image" /> },
+    [TAB.basic]: { icon: BasicIcon, component: <Basic key="basic" /> },
     [TAB.github]: { icon: GithubIcon, component: <Github key="github" /> },
     [TAB.solvecac]: { icon: SolvedacIcon, component: <Solvedac key="solvedac" /> },
     [TAB.list]: { icon: ListIcon, component: <List key="list" /> },

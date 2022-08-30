@@ -158,10 +158,14 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
       );
     case "string":
       return (
-        <div className="relative p-2 flex items-center" key={"string" + index} style={asset.style}>
+        <div
+          className={cc(["relative p-0.5 px-2 flex items-center", isUIList && "p-0"])}
+          key={"string" + index}
+          style={asset.style}
+        >
           <div
             className={cc([
-              "w-full h-min outline-none py-1 px-2 resize-none overflow-hidden transition-all peer",
+              "w-full h-min outline-none px-2 resize-none overflow-hidden transition-all peer",
               uiMode && !isUIList && "bg-white bg-opacity-20 focus:bg-opacity-50",
               !uiMode && asset.link && "cursor-pointer",
               isUIList && "!text-xs",

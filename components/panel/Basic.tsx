@@ -6,11 +6,85 @@ import Tile from "components/Tile";
 import { useUI } from "hooks/useUIContext";
 import { TileInterface } from "constants/tile";
 
-export default function Image() {
+export default function Basic() {
   const { addTile } = useTile();
   const { theme } = useUI();
 
   const ItemList = [
+    {
+      background: theme[Math.floor(Math.random() * theme.length)],
+      type: "Text",
+      assets: [
+        {
+          type: "string",
+          str: "sample text",
+          style: {},
+        },
+      ],
+    },
+    {
+      background: theme[Math.floor(Math.random() * theme.length)],
+      type: "Two Texts",
+      assets: [
+        {
+          type: "string",
+          str: "sample text",
+          style: {},
+        },
+        {
+          type: "string",
+          str: "sample text",
+          style: { fontWeight: 700, fontSize: "2.25rem" },
+        },
+      ],
+    },
+    {
+      background: theme[Math.floor(Math.random() * theme.length)],
+      type: "Three Texts",
+      assets: [
+        {
+          type: "string",
+          str: "sample text",
+          style: {},
+        },
+        {
+          type: "string",
+          str: "sample",
+          style: { fontWeight: 700, fontSize: "1.75rem" },
+        },
+        {
+          type: "string",
+          str: "sample text",
+          style: {},
+        },
+      ],
+    },
+    {
+      background: theme[Math.floor(Math.random() * theme.length)],
+      type: "Four Texts",
+      assets: [
+        {
+          type: "string",
+          str: "sample text",
+          style: {},
+        },
+        {
+          type: "string",
+          str: "sample text",
+          style: {},
+        },
+        {
+          type: "string",
+          str: "sample",
+          style: { fontWeight: 700, fontSize: "1.75rem" },
+        },
+        {
+          type: "string",
+          str: "sample text",
+          style: {},
+        },
+      ],
+    },
     {
       background: theme[Math.floor(Math.random() * theme.length)],
       type: "Plain Image",
