@@ -27,8 +27,15 @@ export default function Header() {
   }, [toggleUIMode, uiMode]);
 
   return (
-    <div className="w-full">
-      <button onClick={() => setUIMode((s: boolean) => !s)}>UI MODE</button>
+    <div className="w-full px-8 py-6 fixed inset-x-0 top-0 flex items-center gap-4 font-semibold text-slate-500">
+      <label className="flex items-center gap-2">
+        UI MODE
+        <input type="checkbox" className="toggle border-2" checked={uiMode} onChange={() => setUIMode((s) => !s)} />
+      </label>
+      <label className="flex items-center gap-2">
+        AUTO SAVE
+        <input type="checkbox" className="toggle border-2" checked={false} disabled />
+      </label>
     </div>
   );
 }
