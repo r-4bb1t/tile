@@ -26,11 +26,8 @@ export default function Solvedac() {
           assets: [
             {
               type: "constant",
-              item: (
-                <div className="text-xs h-8 font-bold w-full flex items-center justify-center gap-1">
-                  <SolvedacIconColored />@{handle ?? "-"}
-                </div>
-              ),
+              item: "solvedac",
+              str: `@${handle ?? "-"}`,
             },
             {
               type: "grid",
@@ -50,11 +47,8 @@ export default function Solvedac() {
           assets: [
             {
               type: "constant",
-              item: (
-                <div className="text-xs h-8 font-bold w-full flex items-center justify-center gap-1 flex-shrink-0">
-                  <SolvedacIconColored />@{handle ?? "-"}
-                </div>
-              ),
+              item: "solvedac",
+              str: `@${handle ?? "-"}`,
             },
             { type: "solvedac", id: handle, itemType: "profile", style: { paddingBottom: "1rem" } },
           ],
@@ -65,11 +59,8 @@ export default function Solvedac() {
           assets: [
             {
               type: "constant",
-              item: (
-                <div className="text-xs h-8 font-bold w-full flex items-center justify-center gap-1">
-                  <SolvedacIconColored />@{handle ?? "-"}
-                </div>
-              ),
+              item: "solvedac",
+              str: `@${handle ?? "-"}`,
             },
             { type: "solvedac", id: handle, itemType: "tier", style: { paddingBottom: "1rem" } },
           ],
@@ -80,11 +71,8 @@ export default function Solvedac() {
           assets: [
             {
               type: "constant",
-              item: (
-                <div className="text-xs h-8 font-bold w-full flex items-center justify-center gap-1">
-                  <SolvedacIconColored />@{handle ?? "-"}
-                </div>
-              ),
+              item: "solvedac",
+              str: `@${handle ?? "-"}`,
             },
             { type: "solvedac", id: handle, itemType: "badge", style: { paddingBottom: "1rem" } },
           ],
@@ -95,11 +83,8 @@ export default function Solvedac() {
           assets: [
             {
               type: "constant",
-              item: (
-                <div className="text-xs h-8 font-bold w-full flex items-center justify-center gap-1">
-                  <SolvedacIconColored />@{handle ?? "-"}
-                </div>
-              ),
+              item: "solvedac",
+              str: `@${handle ?? "-"}`,
             },
             { type: "solvedac", id: handle, itemType: "class", style: { paddingBottom: "1rem" } },
           ],

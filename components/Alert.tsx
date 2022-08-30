@@ -95,7 +95,7 @@ export function Alert({ close, type, title, message }: IAlertProps) {
       initial={{ opacity: 0, y: 50, scale: 0.3 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.2 } }}
-      className={`alert alert-${type} shadow-lg`}
+      className={`alert alert-${type} bg-slate-200 shadow-lg`}
     >
       <div>
         <Icon type={type} />
@@ -106,7 +106,7 @@ export function Alert({ close, type, title, message }: IAlertProps) {
       </div>
       <div className="flex-none">
         <button onClick={handleClick} className="btn btn-ghost btn-sm">
-          Close
+          ×
         </button>
       </div>
     </motion.div>

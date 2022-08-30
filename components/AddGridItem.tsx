@@ -1,144 +1,8 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { VscGithub, VscGithubAlt, VscGithubInverted, VscTwitter, VscMarkdown } from "react-icons/vsc";
-import {
-  AiFillInstagram,
-  AiOutlineInstagram,
-  AiFillFacebook,
-  AiOutlineFacebook,
-  AiFillLinkedin,
-  AiOutlineLinkedin,
-  AiFillAndroid,
-  AiFillCode,
-  AiOutlineAndroid,
-  AiOutlineSlack,
-} from "react-icons/ai";
-import {
-  FaReact,
-  FaVuejs,
-  FaAngular,
-  FaNodeJs,
-  FaJava,
-  FaFigma,
-  FaPython,
-  FaSwift,
-  FaDiscord,
-  FaCss3Alt,
-  FaHtml5,
-  FaAws,
-} from "react-icons/fa";
-import {
-  SiExpress,
-  SiJavascript,
-  SiTypescript,
-  SiCsharp,
-  SiCplusplus,
-  SiC,
-  SiFastapi,
-  SiBootstrap,
-  SiNextdotjs,
-  SiDjango,
-  SiRstudio,
-  SiKotlin,
-  SiIos,
-  SiSpring,
-  SiFirebase,
-  SiLatex,
-  SiAdobeaftereffects,
-  SiAdobephotoshop,
-  SiAdobeillustrator,
-  SiAdobexd,
-  SiMysql,
-  SiPostgresql,
-  SiVisualstudiocode,
-  SiVisualstudio,
-  SiStrapi,
-  SiUnity,
-  SiTailwindcss,
-  SiNativescript,
-  SiWindicss,
-  SiStyledcomponents,
-  SiVercel,
-  SiAdobeindesign,
-  SiHaskell,
-  SiCoffeescript,
-  SiAssemblyscript,
-  SiXcode,
-  SiFlutter,
-} from "react-icons/si";
-import { RiFileExcel2Fill, RiFileWord2Fill, RiFilePpt2Fill } from "react-icons/ri";
 import cc from "classcat";
 import { IconType } from "react-icons";
-
-const Icons = {
-  github1: VscGithub,
-  github2: VscGithubAlt,
-  github3: VscGithubInverted,
-  twitter: VscTwitter,
-  instagram1: AiFillInstagram,
-  instagram2: AiOutlineInstagram,
-  facebook1: AiFillFacebook,
-  facebook2: AiOutlineFacebook,
-  linkedin1: AiFillLinkedin,
-  linkedin2: AiOutlineLinkedin,
-  slack: AiOutlineSlack,
-  discord: FaDiscord,
-  code: AiFillCode,
-  xcode: SiXcode,
-  visualstudio: SiVisualstudio,
-  vscode: SiVisualstudiocode,
-  bootstrap: SiBootstrap,
-  java: FaJava,
-  spring: SiSpring,
-  strapi: SiStrapi,
-  kotlin: SiKotlin,
-  android1: AiFillAndroid,
-  android2: AiOutlineAndroid,
-  swift: FaSwift,
-  ios: SiIos,
-  html: FaHtml5,
-  css: FaCss3Alt,
-  tailwindcss: SiTailwindcss,
-  windicss: SiWindicss,
-  styledcomponents: SiStyledcomponents,
-  figma: FaFigma,
-  markdown: VscMarkdown,
-  c: SiC,
-  csharp: SiCsharp,
-  cpp: SiCplusplus,
-  python: FaPython,
-  django: SiDjango,
-  fastapi: SiFastapi,
-  rstudio: SiRstudio,
-  firebase: SiFirebase,
-  unity: SiUnity,
-  aws: FaAws,
-  haskell: SiHaskell,
-  flutter: SiFlutter,
-  mysql: SiMysql,
-  postgressql: SiPostgresql,
-  latex: SiLatex,
-  react: FaReact,
-  next: SiNextdotjs,
-  vercel: SiVercel,
-  angular: FaAngular,
-  node: FaNodeJs,
-  vue: FaVuejs,
-  javascript: SiJavascript,
-  typescript: SiTypescript,
-  nativescript: SiNativescript,
-  coffeescript: SiCoffeescript,
-  assemblyscript: SiAssemblyscript,
-  express: SiExpress,
-  excel: RiFileExcel2Fill,
-  word: RiFileWord2Fill,
-  powerpoint: RiFilePpt2Fill,
-  aftereffects: SiAdobeaftereffects,
-  photoshop: SiAdobephotoshop,
-  illust: SiAdobeillustrator,
-  indesign: SiAdobeindesign,
-  xd: SiAdobexd,
-};
+import { GridIconsType, Icons } from "constants/tile";
 
 enum TAB {
   icons,
@@ -191,11 +55,11 @@ export default function AddGridItem({ close, addItem }: { close: Function; addIt
         </button> */}
       </div>
       <div className="grid grid-cols-8 gap-1 h-40  overflow-auto">
-        {(Object.keys(Icons) as (keyof typeof Icons)[]).map((icon, i) => (
+        {(Object.keys(Icons) as GridIconsType[]).map((icon, i) => (
           <button
             className="w-8 h-8 flex items-center justify-center"
             key={i}
-            onClick={() => addItem({ type: "icon", icon: Icons[icon], attributes: { classname: "p-2", size: "100%" } })}
+            onClick={() => addItem({ type: "icon", icon: icon, attributes: { classname: "p-2", size: "100%" } })}
           >
             {(Icons[icon] as IconType)({ size: "1.75rem" })}
           </button>

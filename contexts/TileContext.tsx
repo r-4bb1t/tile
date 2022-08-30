@@ -80,7 +80,10 @@ const TileContextProvider: FC = ({ children }) => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("data") !== null) setTiles(JSON.parse(localStorage.getItem("data")!).tiles);
+    if (localStorage.getItem("data") !== null) {
+      if (JSON.parse(localStorage.getItem("data")!).tiles as TileInterface[])
+        setTiles(JSON.parse(localStorage.getItem("data")!).tiles);
+    }
   }, []);
 
   return (

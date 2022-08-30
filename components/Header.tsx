@@ -1,3 +1,4 @@
+import { IconType } from "constants/tile";
 import { useAlert } from "hooks/useAlertContext";
 import { useTile } from "hooks/useTileContext";
 import { useUI } from "hooks/useUIContext";
@@ -29,7 +30,33 @@ export default function Header() {
   }, [uiMode]);
 
   const save = () => {
-    localStorage.setItem("data", JSON.stringify({ tiles: tiles, autosave: autosave }));
+    localStorage.setItem(
+      "data",
+      JSON.stringify({
+        /*      tiles: tiles.map((tile) => {
+          return {
+            ...tile,
+            assets: tile.assets.map((asset) => {
+              if ("item" in asset) return { ...asset, item: asset.item.innerHTML };
+              if ("items" in asset)
+                return {
+                  ...asset,
+                  items: asset.items.map((item) => {
+                    if (typeof item === "string") {
+                      return item;
+                    } else if (item.type === "constant") {
+
+                    } else return item;
+                  }),
+                };
+              return { ...asset };
+            }),
+          };
+        }), */
+        tiles,
+        autosave,
+      }),
+    );
     push({ type: "success", message: "Saved!" });
   };
 

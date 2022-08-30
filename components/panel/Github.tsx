@@ -20,11 +20,8 @@ export default function Github() {
       assets: [
         {
           type: "constant",
-          item: (
-            <div className="text-xs h-8 font-bold w-full flex items-center justify-center gap-1">
-              <GithubIconColored />@{session?.user?.name || "-"}
-            </div>
-          ),
+          item: "github",
+          str: `@${session?.user?.name || "-"}`,
         },
         {
           type: "commit",
@@ -40,11 +37,8 @@ export default function Github() {
       assets: [
         {
           type: "constant",
-          item: (
-            <div className="text-xs h-8 font-bold w-full flex items-center justify-center gap-1">
-              <GithubIconColored />@{session?.user?.name || "-"}
-            </div>
-          ),
+          item: "github",
+          str: `@${session?.user?.name || "-"}`,
         },
         {
           type: "commit",
@@ -60,11 +54,7 @@ export default function Github() {
       assets: [
         {
           type: "constant",
-          item: (
-            <div className="text-xs h-8 font-bold w-full flex items-center justify-center gap-1">
-              <GithubIconColored />@{session?.user?.name || "-"}
-            </div>
-          ),
+          item: "github",
         },
         {
           type: "commit",

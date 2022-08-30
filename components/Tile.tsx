@@ -19,21 +19,45 @@ import {
   GridType,
   ListType,
   ConstantType,
+  StringType,
+  Icons,
 } from "constants/tile";
 import { useUI } from "hooks/useUIContext";
 import Commits from "./Commits";
 import Solvedac from "./Solvedac";
-import { PlusIcon } from "./Icons";
+import { GithubIconColored, PlusIcon, SolvedacIconColored } from "./Icons";
 import StyleFloat from "./StyleFloat";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTile } from "hooks/useTileContext";
 import AddGridItem from "./AddGridItem";
 import { useAuth } from "hooks/useAuthContext";
 import { useDropzone } from "react-dropzone";
+import { IconType as ReactIconType } from "react-icons";
 
 const getMinColumn = (length: number, floor: number, ceil: number) => {
   if (Math.ceil(length / floor) * floor >= Math.ceil(length / ceil) * ceil) return ceil;
   return floor;
+};
+
+const ConstantItem = ({ type, str }: { type: "github" | "solvedac"; str: string }) => {
+  switch (type) {
+    case "solvedac":
+      return (
+        <div className="text-xs h-8 font-bold w-full flex items-center justify-center gap-1">
+          <SolvedacIconColored />
+          {str}
+        </div>
+      );
+    case "github":
+      return (
+        <div className="text-xs h-8 font-bold w-full flex items-center justify-center gap-1">
+          <GithubIconColored />
+          {str}
+        </div>
+      );
+    default:
+      return null;
+  }
 };
 
 const TileIcon = ({
@@ -169,7 +193,23 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
             ])}
             contentEditable={uiMode && !isUIList}
             suppressContentEditableWarning
-            onChange={() => setValue(textRef.current!.innerText)}
+            onChange={() => {
+              setValue(textRef.current!.innerText);
+              setTiles((tiles) =>
+                tiles.map((tile) => {
+                  if (tile.i === id) {
+                    return {
+                      ...tile,
+                      assets: (tile.assets as StringType[]).map((asset, i) => {
+                        if (i === index) return { ...asset, str: textRef.current!.innerText };
+                        return asset;
+                      }),
+                    };
+                  }
+                  return tile;
+                }),
+              );
+            }}
             ref={textRef}
             onFocus={() => setIsFocused(true)}
             onClick={() => {
@@ -321,7 +361,7 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
                   {
                     icon: (
                       <TileIcon id={id} index={index} itemIndex={itemIndex}>
-                        {"icon" in item && item.icon({ ...(item as IconType).attributes })}
+                        {"icon" in item && Icons[item.icon]({ ...(item as IconType).attributes })}
                       </TileIcon>
                     ),
                     solvedac: (
@@ -347,7 +387,7 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
                         }}
                       />
                     ),
-                    constant: (item as ConstantType).item,
+                    constant: <ConstantItem type={(item as ConstantType).item} str={(item as ConstantType).str} />,
                   }[item.type]
                 }
 
@@ -415,7 +455,7 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
         </div>
       );
     case "constant":
-      return <div>{asset.item}</div>;
+      return <ConstantItem type={asset.item} str={asset.str} />;
     default:
       return null;
   }
@@ -459,7 +499,12 @@ const Tile = ({
       </div>
       {isUIList ? (
         <>
-          <div className="opacity-0 transition-opacity group-hover:opacity-80 absolute inset-0 bg-black bg-opacity-40 p-8">
+          <div
+            className="opacity-0 transition-opacity group-hover:opacity-80 absolute inset-0 bg-black bg-opacity-40 p-8"
+            style={{
+              borderRadius: `${borderRadius}px`,
+            }}
+          >
             <PlusIcon />
           </div>
           <div className="flex justify-center text-xs px-2 py-1 absolute -inset-x-8 bottom-full">{item.type}</div>

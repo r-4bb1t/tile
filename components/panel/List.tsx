@@ -94,10 +94,10 @@ export default function List() {
         {
           type: "grid",
           items: [
-            { type: "icon", icon: AiFillHeart, attributes: { classname: "p-2", size: "100%" } },
-            { type: "icon", icon: AiFillHeart, attributes: { classname: "p-2", size: "100%" } },
-            { type: "icon", icon: AiFillHeart, attributes: { classname: "p-2", size: "100%" } },
-            { type: "icon", icon: AiFillHeart, attributes: { classname: "p-2", size: "100%" } },
+            { type: "icon", icon: "heart", attributes: { classname: "p-2", size: "100%" } },
+            { type: "icon", icon: "heart", attributes: { classname: "p-2", size: "100%" } },
+            { type: "icon", icon: "heart", attributes: { classname: "p-2", size: "100%" } },
+            { type: "icon", icon: "heart", attributes: { classname: "p-2", size: "100%" } },
           ],
           style: {},
         },
@@ -111,10 +111,10 @@ export default function List() {
         {
           type: "grid",
           items: [
-            { type: "icon", icon: AiFillHeart, attributes: { classname: "p-2", size: "100%" } },
-            { type: "icon", icon: AiFillHeart, attributes: { classname: "p-2", size: "100%" } },
-            { type: "icon", icon: AiFillHeart, attributes: { classname: "p-2", size: "100%" } },
-            { type: "icon", icon: AiFillHeart, attributes: { classname: "p-2", size: "100%" } },
+            { type: "icon", icon: "heart", attributes: { classname: "p-2", size: "100%" } },
+            { type: "icon", icon: "heart", attributes: { classname: "p-2", size: "100%" } },
+            { type: "icon", icon: "heart", attributes: { classname: "p-2", size: "100%" } },
+            { type: "icon", icon: "heart", attributes: { classname: "p-2", size: "100%" } },
           ],
           style: { paddingTop: "0px" },
         },
