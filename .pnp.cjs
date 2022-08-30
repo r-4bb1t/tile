@@ -62,6 +62,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-beautiful-dnd", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:13.1.0"],\
             ["react-color-palette", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:6.2.0"],\
             ["react-dom", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:18.0.0"],\
+            ["react-dropzone", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:14.2.2"],\
             ["react-grid-layout", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:1.3.4"],\
             ["react-icons", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:4.4.0"],\
             ["react-resizable", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:3.0.4"],\
@@ -1019,6 +1020,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/ast-types-flow-npm-0.0.7-7d32a3abf5-a26dcc2182.zip/node_modules/ast-types-flow/",\
           "packageDependencies": [\
             ["ast-types-flow", "npm:0.0.7"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["attr-accept", [\
+        ["npm:2.2.2", {\
+          "packageLocation": "./.yarn/cache/attr-accept-npm-2.2.2-b9cd0d8eac-496f724935.zip/node_modules/attr-accept/",\
+          "packageDependencies": [\
+            ["attr-accept", "npm:2.2.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -2544,6 +2554,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["file-selector", [\
+        ["npm:0.6.0", {\
+          "packageLocation": "./.yarn/cache/file-selector-npm-0.6.0-04259af1f7-7d051b6e5d.zip/node_modules/file-selector/",\
+          "packageDependencies": [\
+            ["file-selector", "npm:0.6.0"],\
+            ["tslib", "npm:2.4.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["fill-range", [\
         ["npm:7.0.1", {\
           "packageLocation": "./.yarn/cache/fill-range-npm-7.0.1-b8b1817caa-cc283f4e65.zip/node_modules/fill-range/",\
@@ -4023,6 +4043,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-beautiful-dnd", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:13.1.0"],\
             ["react-color-palette", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:6.2.0"],\
             ["react-dom", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:18.0.0"],\
+            ["react-dropzone", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:14.2.2"],\
             ["react-grid-layout", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:1.3.4"],\
             ["react-icons", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:4.4.0"],\
             ["react-resizable", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:3.0.4"],\
@@ -4892,6 +4913,31 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["react-dropzone", [\
+        ["npm:14.2.2", {\
+          "packageLocation": "./.yarn/cache/react-dropzone-npm-14.2.2-298be67ed1-ef9ea7b3b5.zip/node_modules/react-dropzone/",\
+          "packageDependencies": [\
+            ["react-dropzone", "npm:14.2.2"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:14.2.2", {\
+          "packageLocation": "./.yarn/__virtual__/react-dropzone-virtual-ce390f2f40/0/cache/react-dropzone-npm-14.2.2-298be67ed1-ef9ea7b3b5.zip/node_modules/react-dropzone/",\
+          "packageDependencies": [\
+            ["react-dropzone", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:14.2.2"],\
+            ["@types/react", "npm:17.0.43"],\
+            ["attr-accept", "npm:2.2.2"],\
+            ["file-selector", "npm:0.6.0"],\
+            ["prop-types", "npm:15.8.1"],\
+            ["react", "npm:18.0.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["react-grid-layout", [\
         ["npm:1.3.4", {\
           "packageLocation": "./.yarn/cache/react-grid-layout-npm-1.3.4-e416174768-f56c8c452a.zip/node_modules/react-grid-layout/",\
@@ -5737,6 +5783,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/tslib-npm-2.3.1-0e21e18015-de17a98d46.zip/node_modules/tslib/",\
           "packageDependencies": [\
             ["tslib", "npm:2.3.1"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:2.4.0", {\
+          "packageLocation": "./.yarn/cache/tslib-npm-2.4.0-9cb6dc5030-8c4aa6a3c5.zip/node_modules/tslib/",\
+          "packageDependencies": [\
+            ["tslib", "npm:2.4.0"]\
           ],\
           "linkType": "HARD"\
         }]\

@@ -1,5 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { Dispatch, forwardRef, ReactNode, SetStateAction, useEffect, useRef, useState } from "react";
+import React, {
+  Dispatch,
+  forwardRef,
+  ReactNode,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import cc from "classcat";
 import {
   TileInterface,
@@ -20,6 +29,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useTile } from "hooks/useTileContext";
 import AddGridItem from "./AddGridItem";
 import { useAuth } from "hooks/useAuthContext";
+import { useDropzone } from "react-dropzone";
 
 const getMinColumn = (length: number, floor: number, ceil: number) => {
   if (Math.ceil(length / floor) * floor >= Math.ceil(length / ceil) * ceil) return ceil;
@@ -60,6 +70,15 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
   const ulRef = useRef<HTMLUListElement>(null);
   const [isGridModalOpen, setIsGridModalOpen] = useState(false);
 
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    // this callback will be called after files get dropped, we will get the acceptedFiles. If you want, you can even access the rejected files too
+    console.log(acceptedFiles[0]);
+  }, []);
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: { "image/*": [] },
+  });
+
   useEffect(() => {
     if (asset.type === "string") setValue(asset.str);
   }, [asset]);
@@ -67,18 +86,44 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
   switch (asset.type) {
     case "image":
       return (
-        <img
-          src={asset.url}
-          className={cc(["w-full h-full object-cover", !uiMode && asset.link && "cursor-pointer"])}
-          alt="image"
-          key={"image" + index}
-          style={{
-            borderRadius: `${borderRadius}px`,
-          }}
-          onClick={() => {
-            !uiMode && asset.link && window.open(asset.link);
-          }}
-        />
+        <div className="w-full h-full relative group">
+          <img
+            src={asset.url}
+            className={cc([
+              "w-full h-full object-cover",
+              !uiMode && asset.link && "cursor-pointer",
+              uiMode && !isUIList && "peer",
+            ])}
+            alt="image"
+            key={"image" + index}
+            style={{
+              borderRadius: `${borderRadius}px`,
+            }}
+            onClick={() => {
+              !uiMode && asset.link && window.open(asset.link);
+            }}
+          />
+          <div
+            className={cc(["dropzone-div absolute inset-0 w-full h-full"])}
+            style={{
+              borderRadius: `${borderRadius}px`,
+            }}
+            {...getRootProps()}
+          >
+            <input className="dropzone-input" {...getInputProps()} />
+            <div
+              className={cc([
+                "dropzone-content p-10 text-center absolute inset-0 w-full h-full group-hover:opacity-100 text-white bg-opacity-40 opacity-0 bg-black flex items-center justify-center transition-all",
+                uiMode && !isUIList && isDragActive && "opacity-100 bg-opacity-60",
+              ])}
+            >
+              <div>
+                <span className="font-bold">Drag and drop file</span> or <span className="font-bold">click here</span>{" "}
+                to upload image
+              </div>
+            </div>
+          </div>
+        </div>
       );
     case "string":
       return (
