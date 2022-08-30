@@ -1,4 +1,4 @@
-import { createContext, Dispatch, FC, SetStateAction, useState } from "react";
+import { createContext, Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { TileInterface, TileAssetType } from "constants/tile";
 import { Layout } from "react-grid-layout";
 import { useUI } from "hooks/useUIContext";
@@ -78,6 +78,10 @@ const TileContextProvider: FC = ({ children }) => {
   const removeTile = (id: string) => {
     setTiles((g) => g.filter((g) => g.i !== id));
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("data") !== null) setTiles(JSON.parse(localStorage.getItem("data")!).tiles);
+  }, []);
 
   return (
     <TileContext.Provider value={{ tiles, addTile, removeTile, onLayoutChange, setTiles }}>
