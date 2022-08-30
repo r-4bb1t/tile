@@ -43,14 +43,14 @@ const ConstantItem = ({ type, str }: { type: "github" | "solvedac"; str: string 
   switch (type) {
     case "solvedac":
       return (
-        <div className="text-xs h-8 font-bold w-full flex items-center justify-center gap-1">
+        <div className="text-xs h-10 font-bold w-full flex items-center justify-center gap-1">
           <SolvedacIconColored />
           {str}
         </div>
       );
     case "github":
       return (
-        <div className="text-xs h-8 font-bold w-full flex items-center justify-center gap-1">
+        <div className="text-xs h-10 font-bold w-full flex items-center justify-center gap-1">
           <GithubIconColored />
           {str}
         </div>
