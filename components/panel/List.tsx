@@ -6,6 +6,7 @@ import Tile from "components/Tile";
 import { useUI } from "hooks/useUIContext";
 import { TileInterface } from "constants/tile";
 import { AiFillHeart } from "react-icons/ai";
+import { PLACEHOLDER } from "constants/etc";
 
 export default function List() {
   const { addTile } = useTile();
@@ -67,6 +68,23 @@ export default function List() {
       assets: [
         { type: "string", str: "List", style: { fontWeight: 700, fontSize: "1.25rem" } },
         { type: "list", items: ["item1", "item2", "item3"], style: { listStyleType: "heart" } },
+      ],
+    },
+    {
+      background: theme[Math.floor(Math.random() * theme.length)],
+      type: "List With Image",
+      assets: [
+        { type: "image", url: PLACEHOLDER, style: {} },
+        {
+          type: "list",
+          items: ["item1", "item2", "item3"],
+          style: {
+            position: "absolute",
+            inset: 0,
+            fontWeight: 700,
+            color: "#ffffff",
+          },
+        },
       ],
     },
     {

@@ -2,6 +2,7 @@ import { createContext, Dispatch, FC, SetStateAction, useState } from "react";
 import { TileInterface, TileAssetType } from "constants/tile";
 import { Layout } from "react-grid-layout";
 import { useUI } from "hooks/useUIContext";
+import { PLACEHOLDER } from "constants/etc";
 
 interface TileContextProps {
   tiles: TileInterface[];
@@ -40,7 +41,7 @@ const TileContextProvider: FC = ({ children }) => {
       h: 2,
       background: theme[Math.floor(Math.random() * theme.length)],
       type: "Profile Image",
-      assets: [{ type: "image", url: "https://avatars.githubusercontent.com/u/52532871?v=4", style: {} }],
+      assets: [{ type: "image", url: PLACEHOLDER, style: {} }],
     },
   ] as TileInterface[]);
 

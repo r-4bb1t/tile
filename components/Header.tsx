@@ -1,10 +1,10 @@
 import { useUI } from "hooks/useUIContext";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function Header() {
   const { uiMode, setUIMode } = useUI();
 
-  const toggleUIMode = () => {
+  const toggleUIMode = useCallback(() => {
     if (uiMode) {
       document.querySelectorAll(".ui-only").forEach((ui) => {
         ui.setAttribute("style", (ui.getAttribute("style") || "").replace(" display: none;", ""));
@@ -20,7 +20,7 @@ export default function Header() {
         ui.setAttribute("style", (ui.getAttribute("style") ?? "") + " display: none;");
       });
     }
-  };
+  }, [uiMode]);
 
   useEffect(() => {
     toggleUIMode();

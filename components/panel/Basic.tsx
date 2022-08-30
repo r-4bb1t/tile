@@ -5,6 +5,7 @@ import { useAlert } from "hooks/useAlertContext";
 import Tile from "components/Tile";
 import { useUI } from "hooks/useUIContext";
 import { TileInterface } from "constants/tile";
+import { PLACEHOLDER } from "constants/etc";
 
 export default function Basic() {
   const { addTile } = useTile();
@@ -91,7 +92,7 @@ export default function Basic() {
       assets: [
         {
           type: "image",
-          url: "http://www.proedsolutions.com/wp-content/themes/micron/images/placeholders/placeholder_large_dark.jpg",
+          url: PLACEHOLDER,
           style: {},
         },
       ],
@@ -102,7 +103,7 @@ export default function Basic() {
       assets: [
         {
           type: "image",
-          url: "http://www.proedsolutions.com/wp-content/themes/micron/images/placeholders/placeholder_large_dark.jpg",
+          url: PLACEHOLDER,
           style: {},
         },
         {

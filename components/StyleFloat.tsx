@@ -147,7 +147,7 @@ export default function StyleFloat({
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       exit={{ scale: 0, opacity: 0, transition: { duration: 0.2 } }}
-      className="pretendard absolute bottom-full text-black text-left z-[100] flex flex-col -translate-y-3 origin-bottom bg-white p-4 drop-shadow-lg rounded text-sm gap-2"
+      className="pretendard pointer-events-auto absolute bottom-full text-black text-left z-[1000] flex flex-col -translate-y-3 origin-bottom bg-white p-4 drop-shadow-lg rounded text-sm gap-2"
       ref={styleFloatRef}
     >
       <div className="flex w-full gap-2">

@@ -140,7 +140,7 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
             <input className="dropzone-input" {...getInputProps()} />
             <div
               className={cc([
-                "dropzone-content p-10 text-center absolute inset-0 w-full h-full text-white bg-opacity-40 opacity-0 bg-black flex items-center justify-center transition-all",
+                "dropzone-content p-4 text-xs text-center absolute inset-0 w-full h-full text-white bg-opacity-40 opacity-0 bg-black flex items-center justify-center transition-all",
                 uiMode && !isUIList && isDragActive && "opacity-100 bg-opacity-60",
                 !isUIList && "group-hover:opacity-100",
               ])}
@@ -156,13 +156,13 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
     case "string":
       return (
         <div
-          className={cc(["relative p-0.5 px-2 flex items-center", isUIList && "p-0"])}
+          className={cc(["relative p-0.5 px-2 flex items-center pointer-events-none", isUIList && "p-0"])}
           key={"string" + index}
           style={asset.style}
         >
           <div
             className={cc([
-              "w-full h-min outline-none px-2 resize-none overflow-hidden transition-all peer",
+              "w-full h-min outline-none px-2 resize-none overflow-hidden transition-all peer pointer-events-auto",
               uiMode && !isUIList && "bg-white bg-opacity-20 focus:bg-opacity-50",
               !uiMode && asset.link && "cursor-pointer",
               isUIList && "!text-xs",
@@ -197,13 +197,17 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
       );
     case "list":
       return (
-        <div className="h-full flex flex-col justify-center px-1" key={"list" + index}>
-          <ul className="pl-8 pr-1 overflow-auto mr-1 mb-1" style={asset.style} ref={ulRef}>
+        <div
+          className="h-full flex flex-col justify-center px-1 pointer-events-none"
+          key={"list" + index}
+          style={asset.style}
+        >
+          <ul className="pl-8 pr-1 overflow-auto mr-1 mb-1 [list-style-type:inherit]" ref={ulRef}>
             {asset.items.map((item, itemIndex) => (
               <li
                 key={itemIndex}
                 className={cc([
-                  "relative transition-all pl-1 pr-2 m-1",
+                  "relative transition-all pl-1 pr-2 m-1 pointer-events-auto",
                   uiMode && !isUIList && "bg-white bg-opacity-20 child-focus:bg-opacity-50",
                   isUIList && "!text-xs",
                   !uiMode && asset.link && "cursor-pointer",
