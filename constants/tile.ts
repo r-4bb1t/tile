@@ -5,6 +5,7 @@ import { IconBaseProps } from "react-icons";
 interface DefaultAssetType {
   style: CSSProperties;
   type: string;
+  link?: string | null;
 }
 
 export interface StringType extends DefaultAssetType {

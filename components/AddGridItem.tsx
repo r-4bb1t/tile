@@ -165,21 +165,21 @@ export default function AddGridItem({ close, addItem }: { close: Function; addIt
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       exit={{ scale: 0, opacity: 0, transition: { duration: 0.2 } }}
-      className="absolute bottom-full w-max text-black text-left z-[100] -translate-y-3 origin-bottom bg-white p-4 drop-shadow-lg rounded flex flex-col items-center text-sm gap-2"
+      className="absolute bottom-full w-max text-black text-left z-[100] -translate-y-3 origin-bottom bg-white p-4 pt-1 drop-shadow-lg rounded flex flex-col items-center text-sm gap-2"
       ref={addGridItemRef}
     >
-      <div className="w-full grid grid-cols-2 justify-center place-items-center mb-1">
+      <div className="w-full flex justify-center place-items-center mb-1">
         <button
           onClick={() => setTab(TAB.icons)}
           className={cc([
-            "relative flex justify-center p-2",
+            "relative flex justify-center p-2 w-full",
             tab === TAB.icons &&
               "font-extrabold text-slate-500 after:absolute after:h-[2px] after:bottom-0 after:inset-x-4 after:bg-slate-400",
           ])}
         >
           Icons
         </button>
-        <button
+        {/*   <button
           onClick={() => setTab(TAB.assets)}
           className={cc([
             "relative flex justify-center p-2",
@@ -188,9 +188,9 @@ export default function AddGridItem({ close, addItem }: { close: Function; addIt
           ])}
         >
           Assets
-        </button>
+        </button> */}
       </div>
-      <div className="grid grid-cols-8 gap-1 h-48 overflow-auto">
+      <div className="grid grid-cols-8 gap-1 h-40  overflow-auto">
         {(Object.keys(Icons) as (keyof typeof Icons)[]).map((icon, i) => (
           <button
             className="w-8 h-8 flex items-center justify-center"

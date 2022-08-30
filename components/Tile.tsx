@@ -69,11 +69,14 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
       return (
         <img
           src={asset.url}
-          className="w-full h-full object-cover"
+          className={cc(["w-full h-full object-cover", !uiMode && asset.link && "cursor-pointer"])}
           alt="image"
           key={"image" + index}
           style={{
             borderRadius: `${borderRadius}px`,
+          }}
+          onClick={() => {
+            !uiMode && asset.link && window.open(asset.link);
           }}
         />
       );
@@ -84,6 +87,7 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
             className={cc([
               "w-full h-min outline-none py-1 px-2 resize-none overflow-hidden transition-all peer",
               uiMode && !isUIList && "bg-white bg-opacity-20 focus:bg-opacity-50",
+              !uiMode && asset.link && "cursor-pointer",
               isUIList && "!text-xs",
             ])}
             contentEditable={uiMode && !isUIList}
@@ -91,6 +95,9 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
             onChange={() => setValue(textRef.current!.innerText)}
             ref={textRef}
             onFocus={() => setIsFocused(true)}
+            onClick={() => {
+              !uiMode && asset.link && window.open(asset.link);
+            }}
           >
             {value}
           </div>
@@ -121,7 +128,11 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
                 "relative transition-all pl-1 pr-2 m-1",
                 uiMode && !isUIList && "bg-white bg-opacity-20 child-focus:bg-opacity-50",
                 isUIList && "!text-xs",
+                !uiMode && asset.link && "cursor-pointer",
               ])}
+              onClick={() => {
+                !uiMode && asset.link && window.open(asset.link);
+              }}
             >
               <div
                 contentEditable={uiMode && typeof item === "string" && !isUIList}
@@ -214,9 +225,13 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
                 className={cc([
                   "relative transition-all flex items-center min-h-0 min-w-0 w-full h-full",
                   uiMode && !isUIList && "bg-white bg-opacity-20 focus:bg-opacity-50",
+                  !uiMode && item.link && "cursor-pointer",
                 ])}
                 style={{
                   padding: `${Math.max(size[0], size[1]) * 2}px`,
+                }}
+                onClick={() => {
+                  !uiMode && item.link && window.open(item.link);
                 }}
               >
                 {

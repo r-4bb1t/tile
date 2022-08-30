@@ -71,7 +71,7 @@ export default function List() {
     },
     {
       background: theme[Math.floor(Math.random() * theme.length)],
-      type: "Grid",
+      type: "Icon Grid",
       assets: [
         {
           type: "grid",
@@ -87,7 +87,7 @@ export default function List() {
     },
     {
       background: theme[Math.floor(Math.random() * theme.length)],
-      type: "Grid with Title",
+      type: "Icon Grid with Title",
       assets: [
         { type: "string", str: "Grid", style: { fontWeight: 700, fontSize: "1.25rem" } },
         {
