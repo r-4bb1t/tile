@@ -1,7 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { Dispatch, forwardRef, ReactNode, SetStateAction, useEffect, useRef, useState } from "react";
 import cc from "classcat";
-import { TileInterface, TileAssetType, IconType, SolvedacType, ImageType, GridType, ListType } from "constants/tile";
+import {
+  TileInterface,
+  TileAssetType,
+  IconType,
+  SolvedacType,
+  ImageType,
+  GridType,
+  ListType,
+  ConstantType,
+} from "constants/tile";
 import { useUI } from "hooks/useUIContext";
 import Commits from "./Commits";
 import Solvedac from "./Solvedac";
@@ -10,6 +19,7 @@ import StyleFloat from "./StyleFloat";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTile } from "hooks/useTileContext";
 import AddGridItem from "./AddGridItem";
+import { useAuth } from "hooks/useAuthContext";
 
 const getMinColumn = (length: number, floor: number, ceil: number) => {
   if (Math.ceil(length / floor) * floor >= Math.ceil(length / ceil) * ceil) return ceil;
@@ -43,6 +53,7 @@ const TileIcon = ({
 const AssetToComponent = (asset: TileAssetType, index: number, size: number[], isUIList: boolean, id: string) => {
   const [value, setValue] = useState("");
   const { uiMode, borderRadius } = useUI();
+  const { solvedac } = useAuth();
   const textRef = useRef<HTMLDivElement>(null);
   const [isFocused, setIsFocused] = useState(false);
   const { setTiles } = useTile();
@@ -89,14 +100,15 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
         </div>
       );
     case "commit":
-      return <Commits id="r-4bb1t" size={size} key={"commit" + index} />;
+      return <Commits id="r-4bb1t" size={size} key={"commit" + index} isUIList={isUIList} style={asset.style} />;
     case "solvedac":
       return (
         <div
-          className={cc(["w-full h-full flex items-center justify-center p-10", isUIList && "!p-4"])}
+          className={cc(["w-full h-full flex items-center justify-center min-h-0"])}
           key={"solvedac" + index}
+          style={asset.style}
         >
-          <Solvedac id="r4bb1t" key={"solvedac" + index} itemType={asset.itemType} isUiList={isUIList} />
+          <Solvedac id={solvedac} key={"solvedac" + index} itemType={asset.itemType} isUiList={isUIList} />
         </div>
       );
     case "list":
@@ -216,7 +228,7 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
                     ),
                     solvedac: (
                       <Solvedac
-                        id="r4bb1t"
+                        id={solvedac}
                         key={"solvedac" + index + itemIndex}
                         itemType={(item as SolvedacType).itemType}
                         isUiList={isUIList}
@@ -237,6 +249,7 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
                         }}
                       />
                     ),
+                    constant: (item as ConstantType).item,
                   }[item.type]
                 }
 
@@ -303,6 +316,8 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
           )}
         </div>
       );
+    case "constant":
+      return <div>{asset.item}</div>;
     default:
       return null;
   }
@@ -332,7 +347,7 @@ const Tile = ({
     <div
       className={cc([
         "relative flex flex-col justify-center w-full h-full overflow-visible select-none",
-        isUIList && "w-24 h-24 group",
+        isUIList && "w-24 h-24 group mt-8",
       ])}
       style={{
         background: item.background,
@@ -349,9 +364,7 @@ const Tile = ({
           <div className="opacity-0 transition-opacity group-hover:opacity-80 absolute inset-0 bg-black bg-opacity-40 p-8">
             <PlusIcon />
           </div>
-          <div className="flex justify-center text-xs px-2 py-1 absolute inset-x-0 top-0 text-white ui-only drop-shadow-md">
-            {item.type}
-          </div>
+          <div className="flex justify-center text-xs px-2 py-1 absolute -inset-x-8 bottom-full">{item.type}</div>
         </>
       ) : (
         <div

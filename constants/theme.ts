@@ -1,5 +1,5 @@
 export const THEME = {
-  monochrome: ["#DDDDDD", "#CCCCCC", "#BBBBBB"],
+  monochrome: ["#e2e8f0", "#cbd5e1", "#94a3b8"],
   rainbow: ["#CC99C9", "#9EC1CF", "#9EE09E", "#FDFD97", "#FEB144", "#FF6663"],
   violet: ["#355070", "#6D597A", "#B56576", "#E56B6F", "#EAAC8B"],
   greenery: ["#5E7DC2", "#00A1DE", "#00C1D9", "#00DCB8", "#92EF8D"],

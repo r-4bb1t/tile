@@ -6,7 +6,7 @@ export default function Solvedac({
   itemType,
   isUiList = false,
 }: {
-  id: string;
+  id: string | null;
   itemType: string;
   isUiList?: boolean;
 }) {
@@ -25,20 +25,24 @@ export default function Solvedac({
     } catch (e) {
       console.log(e);
     }
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [id]);
 
   switch (itemType) {
     case "tier":
       return (
         <div className="relative flex items-center justify-center group w-full h-full">
-          <img
-            src={`https://static.solved.ac/tier_small/${solvedac?.tier}.svg`}
-            className="w-full h-full object-contain"
-          />
+          {id ? (
+            <img
+              src={`https://static.solved.ac/tier_small/${solvedac?.tier}.svg`}
+              className="w-full h-full object-contain"
+            />
+          ) : (
+            <img src="https://static.solved.ac/tier_small/0.svg" className="w-full h-full object-contain" />
+          )}
 
           {!isUiList && (
             <div className="absolute z-50 -top-6 px-2 py-1 text-xs text-white flex flex-col items-center w-max text-center group-hover:opacity-100 opacity-0 transition-all bg-black bg-opacity-50 pointer-events-none rounded">
@@ -53,7 +57,14 @@ export default function Solvedac({
     case "badge":
       return (
         <div className="relative flex items-center justify-center group w-full h-full">
-          <img src={`${solvedac?.badge.badgeImageUrl}`} className="w-full h-full object-contain" />
+          {id ? (
+            <img src={`${solvedac?.badge.badgeImageUrl}`} className="w-full h-full object-contain" />
+          ) : (
+            <img
+              src="https://static.solved.ac/profile_badge/120x120/grass_01.png"
+              className="w-full h-full object-contain"
+            />
+          )}
 
           {!isUiList && (
             <div className="absolute z-50 -top-6 px-2 py-1 text-xs text-white flex flex-col items-center w-max text-center group-hover:opacity-100 opacity-0 transition-all bg-black bg-opacity-50 pointer-events-none rounded">
@@ -67,10 +78,16 @@ export default function Solvedac({
     case "class":
       return (
         <div className="relative flex items-center justify-center group w-full h-full">
-          <img
-            src={`https://static.solved.ac/class/c${solvedac?.class}${solvedac?.classDecoration.slice(0, 1)}.svg`}
-            className="w-full h-full object-contain"
-          />
+          {id ? (
+            <img
+              src={`https://static.solved.ac/class/c${solvedac?.class}${solvedac?.classDecoration
+                .slice(0, 1)
+                .replace("n", "")}.svg`}
+              className="w-full h-full object-contain"
+            />
+          ) : (
+            <img src="https://static.solved.ac/class/c0.svg" className="w-full h-full object-contain" />
+          )}
 
           {!isUiList && (
             <div className="absolute z-50 -top-6 px-2 py-1 text-xs text-white flex flex-col items-center w-max text-center group-hover:opacity-100 opacity-0 transition-all bg-black bg-opacity-50 pointer-events-none rounded">
@@ -84,7 +101,14 @@ export default function Solvedac({
     case "profile":
       return (
         <div className="relative flex items-center justify-center group w-full h-full">
-          <img src={solvedac?.profileImageUrl} className="w-full h-full object-contain" />
+          {id ? (
+            <img src={solvedac?.profileImageUrl} className="w-full h-full object-contain" />
+          ) : (
+            <img
+              src="https://static.solved.ac/misc/64x64/default_profile.png"
+              className="w-full h-full object-contain"
+            />
+          )}
 
           {!isUiList && (
             <div className="absolute z-50 -top-6 px-2 py-1 text-xs text-white flex flex-col items-center w-max text-center group-hover:opacity-100 opacity-0 transition-all bg-black bg-opacity-50 pointer-events-none rounded">

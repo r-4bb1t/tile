@@ -1,15 +1,17 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import cc from "classcat";
-import { HomeIcon, ImageIcon, ListIcon, SolvedacIcon } from "../Icons";
+import { GithubIcon, HomeIcon, ImageIcon, ListIcon, SolvedacIcon } from "../Icons";
 import Home from "./home";
 import Image from "./Image";
 import Solvedac from "./Solvedac";
 import List from "./List";
+import Github from "./Github";
 
 enum TAB {
   home,
   image,
+  github,
   solvecac,
   list,
 }
@@ -20,6 +22,7 @@ export default function Panel() {
   const TabItem = {
     [TAB.home]: { icon: HomeIcon, component: <Home key="home" /> },
     [TAB.image]: { icon: ImageIcon, component: <Image key="image" /> },
+    [TAB.github]: { icon: GithubIcon, component: <Github key="image" /> },
     [TAB.solvecac]: { icon: SolvedacIcon, component: <Solvedac key="solvedac" /> },
     [TAB.list]: { icon: ListIcon, component: <List key="list" /> },
   };
@@ -30,7 +33,7 @@ export default function Panel() {
         initial={{ x: "100%" }}
         animate={{ x: "2rem" }}
         exit={{ x: "100%", transition: { duration: 0.2 } }}
-        className="w-[22rem] h-screen fixed top-0 right-0 bg-slate-200 flex"
+        className="w-[22rem] h-screen fixed top-0 right-0 bg-slate-100 flex"
       >
         <div className="w-16 h-screen overflow-y-auto bg-slate-100">
           <div className="grid grid-cols-1 w-full">

@@ -12,8 +12,10 @@ import { resetServerContext } from "react-beautiful-dnd";
 import TileContextProvider from "contexts/TileContext";
 import UIContextProvider from "contexts/UIContext";
 import MessageContextProvider from "contexts/MessageContext";
+import AuthContextProvider from "contexts/AuthContext";
+import { SessionProvider } from "next-auth/react";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const { publicRuntimeConfig } = getConfig();
 
   useEffect(() => {
@@ -23,15 +25,19 @@ function MyApp({ Component, pageProps }: AppProps) {
   resetServerContext();
 
   return (
-    <UIContextProvider>
-      <AlertContextProvider>
-        <TileContextProvider>
-          <MessageContextProvider>
-            <Component {...pageProps} />
-          </MessageContextProvider>
-        </TileContextProvider>
-      </AlertContextProvider>
-    </UIContextProvider>
+    <SessionProvider session={session}>
+      <AuthContextProvider>
+        <UIContextProvider>
+          <AlertContextProvider>
+            <TileContextProvider>
+              <MessageContextProvider>
+                <Component {...pageProps} />
+              </MessageContextProvider>
+            </TileContextProvider>
+          </AlertContextProvider>
+        </UIContextProvider>
+      </AuthContextProvider>
+    </SessionProvider>
   );
 }
 

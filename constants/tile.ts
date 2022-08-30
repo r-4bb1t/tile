@@ -44,7 +44,20 @@ export interface IconType extends DefaultAssetType {
   attributes: IconBaseProps;
 }
 
-export type TileAssetType = StringType | ImageType | CommitType | SolvedacType | ListType | GridType | IconType;
+export interface ConstantType extends DefaultAssetType {
+  type: "constant";
+  item: any;
+}
+
+export type TileAssetType =
+  | StringType
+  | ImageType
+  | CommitType
+  | SolvedacType
+  | ListType
+  | GridType
+  | IconType
+  | ConstantType;
 
 export interface TileInterface extends Layout {
   background: string;

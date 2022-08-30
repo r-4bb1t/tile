@@ -42,28 +42,6 @@ const TileContextProvider: FC = ({ children }) => {
       type: "Profile Image",
       assets: [{ type: "image", url: "https://avatars.githubusercontent.com/u/52532871?v=4", style: {} }],
     },
-    {
-      i: `i${new Date().getTime()}-2`,
-      x: 2,
-      y: 0,
-      w: 1,
-      h: 1,
-      background: theme[Math.floor(Math.random() * theme.length)],
-      type: "Github Commits",
-      maxH: 1,
-      assets: [{ type: "commit", id: "r-4bb1t", style: {} }],
-    },
-    {
-      i: `i${new Date().getTime()}-3`,
-      x: 3,
-      y: 0,
-      w: 1,
-      h: 1,
-      background: theme[Math.floor(Math.random() * theme.length)],
-      type: "SolvedAC",
-      maxH: 1,
-      assets: [{ type: "solvedac", id: "r4bb1t", itemType: "tier", style: {} }],
-    },
   ] as TileInterface[]);
 
   const addTile = (item: TileInterface) => {
