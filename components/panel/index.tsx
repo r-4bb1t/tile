@@ -22,7 +22,7 @@ export default function Panel() {
   const TabItem = {
     [TAB.home]: { icon: HomeIcon, component: <Home key="home" /> },
     [TAB.image]: { icon: ImageIcon, component: <Image key="image" /> },
-    [TAB.github]: { icon: GithubIcon, component: <Github key="image" /> },
+    [TAB.github]: { icon: GithubIcon, component: <Github key="github" /> },
     [TAB.solvecac]: { icon: SolvedacIcon, component: <Solvedac key="solvedac" /> },
     [TAB.list]: { icon: ListIcon, component: <List key="list" /> },
   };

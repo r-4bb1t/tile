@@ -70,10 +70,42 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
   const ulRef = useRef<HTMLUListElement>(null);
   const [isGridModalOpen, setIsGridModalOpen] = useState(false);
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    // this callback will be called after files get dropped, we will get the acceptedFiles. If you want, you can even access the rejected files too
-    console.log(acceptedFiles[0]);
+  const bucket = "https://s3.ap-northeast-2.amazonaws.com/tile.r4bb1t.dev/";
+
+  const onDrop = useCallback(async (acceptedFiles: File[]) => {
+    const file = acceptedFiles[0];
+
+    const result = await (
+      await fetch("/api/upload", {
+        method: "POST",
+        body: JSON.stringify({ name: file.name, type: file.type }),
+      })
+    ).json();
+
+    console.log(result.url);
+
+    await fetch(result.url, {
+      method: "PUT",
+      body: file,
+      headers: { "Content-Type": file.type, "Access-Control-Allow-Origin": "*" },
+    });
+
+    setTiles((tiles) =>
+      tiles.map((tile) => {
+        if (tile.i === id) {
+          return {
+            ...tile,
+            assets: (tile.assets as ImageType[]).map((asset, i) => {
+              if (i === index) return { ...asset, url: bucket + file.name };
+              return asset;
+            }),
+          };
+        }
+        return tile;
+      }),
+    );
   }, []);
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: { "image/*": [] },
@@ -86,7 +118,7 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
   switch (asset.type) {
     case "image":
       return (
-        <div className="w-full h-full relative group">
+        <div className="w-full h-full relative group" key={"image" + index}>
           <img
             src={asset.url}
             className={cc([
@@ -95,7 +127,6 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
               uiMode && !isUIList && "peer",
             ])}
             alt="image"
-            key={"image" + index}
             style={{
               borderRadius: `${borderRadius}px`,
             }}

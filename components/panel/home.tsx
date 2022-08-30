@@ -29,7 +29,7 @@ export default function Home() {
       <ul className="flex flex-col">
         {(Object.keys(THEME) as ThemeList[]).map((palette) => (
           <>
-            <div className="font-semibold flex items-center">
+            <div className="font-semibold flex items-center" key={`div-${palette}`}>
               {palette}
               <button
                 className="w-4 h-4 p-1 mt-0.5"
