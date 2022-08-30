@@ -154,27 +154,29 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
               !uiMode && asset.link && window.open(asset.link);
             }}
           />
-          <div
-            className={cc(["dropzone-div absolute inset-0 w-full h-full"])}
-            style={{
-              borderRadius: `${borderRadius}px`,
-            }}
-            {...getRootProps()}
-          >
-            <input className="dropzone-input" {...getInputProps()} />
+          {uiMode && (
             <div
-              className={cc([
-                "dropzone-content p-4 text-xs text-center absolute inset-0 w-full h-full text-white bg-opacity-40 opacity-0 bg-black flex items-center justify-center transition-all",
-                uiMode && !isUIList && isDragActive && "opacity-100 bg-opacity-60",
-                !isUIList && "group-hover:opacity-100",
-              ])}
+              className={cc(["dropzone-div absolute inset-0 w-full h-full"])}
+              style={{
+                borderRadius: `${borderRadius}px`,
+              }}
+              {...getRootProps()}
             >
-              <div>
-                <span className="font-bold">Drag and drop file</span> or <span className="font-bold">click here</span>{" "}
-                to upload image
+              <input className="dropzone-input" {...getInputProps()} />
+              <div
+                className={cc([
+                  "dropzone-content p-4 text-xs text-center absolute inset-0 w-full h-full text-white bg-opacity-40 opacity-0 bg-black flex items-center justify-center transition-all",
+                  !isUIList && isDragActive && "opacity-100 bg-opacity-60",
+                  !isUIList && "group-hover:opacity-100",
+                ])}
+              >
+                <div>
+                  <span className="font-bold">Drag and drop file</span> or <span className="font-bold">click here</span>{" "}
+                  to upload image
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       );
     case "string":
@@ -510,13 +512,9 @@ const Tile = ({
           <div className="flex justify-center text-xs px-2 py-1 absolute -inset-x-8 bottom-full">{item.type}</div>
         </>
       ) : (
-        <div
-          className="draggable text-sm cursor-move flex justify-between px-2 py-1 absolute inset-x-0 top-0 text-white ui-only hover:bg-black hover:bg-opacity-20 transition-all"
-          style={{ borderRadius: `${borderRadius}px ${borderRadius}px 0 0` }}
-        >
+        <div className="draggable absolute bottom-full inset-x-0 text-sm cursor-move flex justify-between px-2 py-1 text-white ui-only drop-shadow-[0_0_5px_rgba(0,0,0,0.5)] transition-all">
           <div className="flex items-center gap-2">
-            {item.type}
-
+            <div className="truncate">{item.type}</div>
             <div className="h-4 flex justify-center" ref={backgroundRef}>
               <button
                 className="w-4 h-4 rounded-full border-[1px] border-white"
