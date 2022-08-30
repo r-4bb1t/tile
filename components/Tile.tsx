@@ -196,86 +196,88 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
       );
     case "list":
       return (
-        <ul className="pl-8 pr-1 h-full overflow-auto mr-1 mb-1" style={asset.style} ref={ulRef} key={"list" + index}>
-          {asset.items.map((item, itemIndex) => (
-            <li
-              key={itemIndex}
-              className={cc([
-                "relative transition-all pl-1 pr-2 m-1",
-                uiMode && !isUIList && "bg-white bg-opacity-20 child-focus:bg-opacity-50",
-                isUIList && "!text-xs",
-                !uiMode && asset.link && "cursor-pointer",
-              ])}
-              onClick={() => {
-                !uiMode && asset.link && window.open(asset.link);
-              }}
-            >
-              <div
-                contentEditable={uiMode && typeof item === "string" && !isUIList}
-                suppressContentEditableWarning
-                className="w-full outline-none"
-                onFocus={() => setIsFocused(true)}
+        <div className="h-full flex flex-col justify-center px-1" key={"list" + index}>
+          <ul className="pl-8 pr-1 overflow-auto mr-1 mb-1" style={asset.style} ref={ulRef}>
+            {asset.items.map((item, itemIndex) => (
+              <li
+                key={itemIndex}
+                className={cc([
+                  "relative transition-all pl-1 pr-2 m-1",
+                  uiMode && !isUIList && "bg-white bg-opacity-20 child-focus:bg-opacity-50",
+                  isUIList && "!text-xs",
+                  !uiMode && asset.link && "cursor-pointer",
+                ])}
+                onClick={() => {
+                  !uiMode && asset.link && window.open(asset.link);
+                }}
               >
-                {item}
-              </div>
-              {uiMode && !isUIList && (
+                <div
+                  contentEditable={uiMode && typeof item === "string" && !isUIList}
+                  suppressContentEditableWarning
+                  className="w-full outline-none"
+                  onFocus={() => setIsFocused(true)}
+                >
+                  {item}
+                </div>
+                {uiMode && !isUIList && (
+                  <button
+                    className="absolute top-0 right-1"
+                    onClick={() => {
+                      setTiles((tiles) =>
+                        tiles.map((tile) => {
+                          if (tile.i === id) {
+                            return {
+                              ...tile,
+                              assets: (tile.assets as ListType[]).map((asset, i) => {
+                                if (i === index)
+                                  return { ...asset, items: asset.items.filter((item, i) => i !== itemIndex) };
+                                return asset;
+                              }),
+                            };
+                          }
+                          return tile;
+                        }),
+                      );
+                      setTimeout(() => ulRef.current!.scrollTo({ top: 3000, behavior: "smooth" }), 200);
+                    }}
+                  >
+                    ×
+                  </button>
+                )}
+              </li>
+            ))}
+
+            {uiMode && !isUIList && (
+              <div className="absolute bottom-2 inset-x-0 pointer-events-none flex items-center justify-center hover:opacity-50 transition-all">
                 <button
-                  className="absolute top-0 right-1"
-                  onClick={() => {
+                  className="w-6 h-6 pointer-events-auto"
+                  onClick={() =>
                     setTiles((tiles) =>
                       tiles.map((tile) => {
                         if (tile.i === id) {
                           return {
                             ...tile,
                             assets: (tile.assets as ListType[]).map((asset, i) => {
-                              if (i === index)
-                                return { ...asset, items: asset.items.filter((item, i) => i !== itemIndex) };
+                              if (i === index) return { ...asset, items: [...asset.items, ""] };
                               return asset;
                             }),
                           };
                         }
                         return tile;
                       }),
-                    );
-                    setTimeout(() => ulRef.current!.scrollTo({ top: 3000, behavior: "smooth" }), 200);
-                  }}
+                    )
+                  }
                 >
-                  ×
+                  <PlusIcon />
                 </button>
-              )}
-            </li>
-          ))}
+              </div>
+            )}
 
-          {uiMode && !isUIList && (
-            <div className="absolute bottom-2 inset-x-0 pointer-events-none flex items-center justify-center hover:opacity-50 transition-all">
-              <button
-                className="w-6 h-6 pointer-events-auto"
-                onClick={() =>
-                  setTiles((tiles) =>
-                    tiles.map((tile) => {
-                      if (tile.i === id) {
-                        return {
-                          ...tile,
-                          assets: (tile.assets as ListType[]).map((asset, i) => {
-                            if (i === index) return { ...asset, items: [...asset.items, ""] };
-                            return asset;
-                          }),
-                        };
-                      }
-                      return tile;
-                    }),
-                  )
-                }
-              >
-                <PlusIcon />
-              </button>
-            </div>
-          )}
-
-          <AnimatePresence>
-            {isFocused && <StyleFloat type="string" close={() => setIsFocused(false)} id={id} index={index} />}
-          </AnimatePresence>
-        </ul>
+            <AnimatePresence>
+              {isFocused && <StyleFloat type="string" close={() => setIsFocused(false)} id={id} index={index} />}
+            </AnimatePresence>
+          </ul>
+        </div>
       );
     case "grid":
       return (
