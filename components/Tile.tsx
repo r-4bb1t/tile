@@ -121,11 +121,7 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
         <div className="w-full h-full relative group" key={"image" + index}>
           <img
             src={asset.url}
-            className={cc([
-              "w-full h-full object-cover",
-              !uiMode && asset.link && "cursor-pointer",
-              uiMode && !isUIList && "peer",
-            ])}
+            className={cc(["w-full h-full object-cover", !uiMode && asset.link && "cursor-pointer"])}
             alt="image"
             style={{
               borderRadius: `${borderRadius}px`,
@@ -144,8 +140,9 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
             <input className="dropzone-input" {...getInputProps()} />
             <div
               className={cc([
-                "dropzone-content p-10 text-center absolute inset-0 w-full h-full group-hover:opacity-100 text-white bg-opacity-40 opacity-0 bg-black flex items-center justify-center transition-all",
+                "dropzone-content p-10 text-center absolute inset-0 w-full h-full text-white bg-opacity-40 opacity-0 bg-black flex items-center justify-center transition-all",
                 uiMode && !isUIList && isDragActive && "opacity-100 bg-opacity-60",
+                !isUIList && "group-hover:opacity-100",
               ])}
             >
               <div>
