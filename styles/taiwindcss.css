@@ -4,6 +4,6 @@
 
 @layer components {
   .panel-title {
-    @apply text-lg font-bold;
+    @apply text-lg font-bold w-full border-t-[1px] border-t-slate-200 first:border-t-0 pt-4;
   }
 }

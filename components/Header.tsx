@@ -27,15 +27,20 @@ export default function Header() {
   }, [toggleUIMode, uiMode]);
 
   return (
-    <div className="w-full px-8 py-6 fixed inset-x-0 top-0 flex items-center gap-4 font-semibold text-slate-500">
-      <label className="flex items-center gap-2">
-        UI MODE
-        <input type="checkbox" className="toggle border-2" checked={uiMode} onChange={() => setUIMode((s) => !s)} />
-      </label>
-      <label className="flex items-center gap-2">
-        AUTO SAVE
-        <input type="checkbox" className="toggle border-2" checked={false} disabled />
-      </label>
+    <div className="w-full px-8 h-16 fixed z-[100] bg-white inset-x-0 top-0 flex justify-between items-center font-semibold text-slate-500 border-b-slate-200 border-b-[1px]">
+      <div className="flex items-center gap-4">
+        <label className="flex items-center gap-2">
+          UI MODE
+          <input type="checkbox" className="toggle border-2" checked={uiMode} onChange={() => setUIMode((s) => !s)} />
+        </label>
+        <label className="flex items-center gap-2">
+          AUTO SAVE
+          <input type="checkbox" className="toggle border-2" checked={false} disabled />
+        </label>
+      </div>
+      <div className="flex items-center gap-4">
+        <button className="btn btn-ghost">SAVE</button>
+      </div>
     </div>
   );
 }

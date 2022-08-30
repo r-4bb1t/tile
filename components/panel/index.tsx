@@ -35,7 +35,7 @@ export default function Panel() {
         exit={{ x: "100%", transition: { duration: 0.2 } }}
         className="w-[22rem] h-screen fixed top-0 right-0 bg-slate-100 flex"
       >
-        <div className="w-16 h-screen overflow-y-auto bg-slate-100">
+        <div className="w-16 h-screen overflow-y-auto bg-slate-100 pt-16">
           <div className="grid grid-cols-1 w-full">
             {Object.keys(TabItem).map((tabItem) => (
               <button
@@ -54,7 +54,9 @@ export default function Panel() {
           </div>
         </div>
         <div className="pr-9 w-full">
-          <div className="w-full flex flex-col p-4 gap-4 h-screen overflow-y-auto panel">{TabItem[tab].component}</div>
+          <div className="w-full flex flex-col p-4 gap-4 h-screen overflow-y-auto panel pt-16">
+            {TabItem[tab].component}
+          </div>
         </div>
       </motion.div>
     </div>
