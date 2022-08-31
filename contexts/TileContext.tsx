@@ -31,7 +31,9 @@ const TileContextProvider: FC = ({ children }) => {
       h: 1,
       background: theme[Math.floor(Math.random() * theme.length)],
       type: "Name",
-      assets: [{ type: "string", str: "John Doe", style: { fontWeight: 900, fontSize: "2.25rem" } }],
+      assets: [
+        { type: "string", str: "John Doe", style: { fontWeight: 900, fontSize: "2.25rem", fontFamily: "Pretendard" } },
+      ],
     },
     {
       i: `i${new Date().getTime()}-1`,
@@ -41,7 +43,7 @@ const TileContextProvider: FC = ({ children }) => {
       h: 2,
       background: theme[Math.floor(Math.random() * theme.length)],
       type: "Profile Image",
-      assets: [{ type: "image", url: PLACEHOLDER, style: {} }],
+      assets: [{ type: "image", url: PLACEHOLDER, style: { fontFamily: "Pretendard" } }],
     },
   ] as TileInterface[]);
 
