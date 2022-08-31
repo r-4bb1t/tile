@@ -1,5 +1,6 @@
 import { IconType } from "constants/tile";
 import { useAlert } from "hooks/useAlertContext";
+import { useAuth } from "hooks/useAuthContext";
 import { useTile } from "hooks/useTileContext";
 import { useUI } from "hooks/useUIContext";
 import { useCallback, useEffect, useState } from "react";
@@ -8,6 +9,7 @@ export default function Header() {
   const { uiMode, setUIMode, borderRadius, theme, shadow, backdropFilter } = useUI();
   const { tiles } = useTile();
   const { push } = useAlert();
+  const { solvedac, session } = useAuth();
 
   const toggleUIMode = useCallback(() => {
     if (uiMode) {
@@ -37,6 +39,8 @@ export default function Header() {
           theme,
           backdropFilter,
           shadow,
+          solvedac,
+          github: session?.user?.name,
         }),
       );
       push({ type: "success", message: "Saved!" });
