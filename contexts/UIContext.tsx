@@ -1,5 +1,5 @@
 import { THEME, ThemeList } from "constants/theme";
-import { createContext, Dispatch, FC, SetStateAction, useState } from "react";
+import { createContext, Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 
 interface UIContextProps {
   uiMode: boolean;
@@ -38,6 +38,23 @@ const UIContextProvider: FC = ({ children }) => {
   const [borderRadius, setBorderRadius] = useState(5);
   const [backdropFilter, setBackdropFilter] = useState("none");
   const [shadow, setShadow] = useState("none");
+
+  useEffect(() => {
+    if (localStorage.getItem("data") !== null) {
+      if (JSON.parse(localStorage.getItem("data")!).backdropFilter) {
+        setBackdropFilter(JSON.parse(localStorage.getItem("data")!).backdropFilter);
+      }
+      if (JSON.parse(localStorage.getItem("data")!).theme) {
+        setTheme(JSON.parse(localStorage.getItem("data")!).theme);
+      }
+      if (JSON.parse(localStorage.getItem("data")!).borderRadius) {
+        setBorderRadius(JSON.parse(localStorage.getItem("data")!).borderRadius);
+      }
+      if (JSON.parse(localStorage.getItem("data")!).shadow) {
+        setShadow(JSON.parse(localStorage.getItem("data")!).shadow);
+      }
+    }
+  }, []);
 
   return (
     <UIContext.Provider

@@ -3501,6 +3501,7 @@ __metadata:
     react-resizable: ^3.0.4
     react-sizeme: ^3.0.2
     tailwindcss: ^3.0.23
+    throttle-debounce: ^5.0.0
     typescript: ^4.6.0
     vercel: ^24.0.1
   languageName: unknown
@@ -4848,6 +4849,13 @@ __metadata:
   version: 3.0.1
   resolution: "throttle-debounce@npm:3.0.1"
   checksum: e34ef638e8df3a9154249101b68afcbf2652a139c803415ef8a2f6a8bc577bcd4d79e4bb914ad3cd206523ac78b9fb7e80885bfa049f64fbb1927f99d98b5736
+  languageName: node
+  linkType: hard
+
+"throttle-debounce@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "throttle-debounce@npm:5.0.0"
+  checksum: aa8bf25828b4f8645ce863589de05d6807ea3debc147ce7d89624638ff8a16792d6d0baa0f8a32a260f0b163444d74020c6087b713ae561fde594b97b6e51f28
   languageName: node
   linkType: hard
 

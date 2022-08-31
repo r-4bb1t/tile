@@ -6,122 +6,127 @@ import Tile from "components/Tile";
 import { useUI } from "hooks/useUIContext";
 import { TileInterface } from "constants/tile";
 import { PLACEHOLDER } from "constants/etc";
+import { useMemo } from "react";
 
 export default function Basic() {
   const { addTile } = useTile();
   const { theme } = useUI();
 
-  const ItemList = [
-    {
-      background: theme[Math.floor(Math.random() * theme.length)],
-      type: "Text",
-      assets: [
+  const ItemList = useMemo(
+    () =>
+      [
         {
-          type: "string",
-          str: "sample text",
-          style: {},
-        },
-      ],
-    },
-    {
-      background: theme[Math.floor(Math.random() * theme.length)],
-      type: "Two Texts",
-      assets: [
-        {
-          type: "string",
-          str: "sample text",
-          style: {},
+          background: theme[Math.floor(Math.random() * theme.length)],
+          type: "Text",
+          assets: [
+            {
+              type: "string",
+              str: "sample text",
+              style: {},
+            },
+          ],
         },
         {
-          type: "string",
-          str: "sample text",
-          style: { fontWeight: 700, fontSize: "2.25rem" },
-        },
-      ],
-    },
-    {
-      background: theme[Math.floor(Math.random() * theme.length)],
-      type: "Three Texts",
-      assets: [
-        {
-          type: "string",
-          str: "sample text",
-          style: {},
-        },
-        {
-          type: "string",
-          str: "sample",
-          style: { fontWeight: 700, fontSize: "1.75rem" },
+          background: theme[Math.floor(Math.random() * theme.length)],
+          type: "Two Texts",
+          assets: [
+            {
+              type: "string",
+              str: "sample text",
+              style: {},
+            },
+            {
+              type: "string",
+              str: "sample text",
+              style: { fontWeight: 700, fontSize: "2.25rem" },
+            },
+          ],
         },
         {
-          type: "string",
-          str: "sample text",
-          style: {},
-        },
-      ],
-    },
-    {
-      background: theme[Math.floor(Math.random() * theme.length)],
-      type: "Four Texts",
-      assets: [
-        {
-          type: "string",
-          str: "sample text",
-          style: {},
-        },
-        {
-          type: "string",
-          str: "sample text",
-          style: {},
-        },
-        {
-          type: "string",
-          str: "sample",
-          style: { fontWeight: 700, fontSize: "1.75rem" },
+          background: theme[Math.floor(Math.random() * theme.length)],
+          type: "Three Texts",
+          assets: [
+            {
+              type: "string",
+              str: "sample text",
+              style: {},
+            },
+            {
+              type: "string",
+              str: "sample",
+              style: { fontWeight: 700, fontSize: "1.75rem" },
+            },
+            {
+              type: "string",
+              str: "sample text",
+              style: {},
+            },
+          ],
         },
         {
-          type: "string",
-          str: "sample text",
-          style: {},
+          background: theme[Math.floor(Math.random() * theme.length)],
+          type: "Four Texts",
+          assets: [
+            {
+              type: "string",
+              str: "sample text",
+              style: {},
+            },
+            {
+              type: "string",
+              str: "sample text",
+              style: {},
+            },
+            {
+              type: "string",
+              str: "sample",
+              style: { fontWeight: 700, fontSize: "1.75rem" },
+            },
+            {
+              type: "string",
+              str: "sample text",
+              style: {},
+            },
+          ],
         },
-      ],
-    },
-    {
-      background: theme[Math.floor(Math.random() * theme.length)],
-      type: "Plain Image",
-      assets: [
         {
-          type: "image",
-          url: PLACEHOLDER,
-          style: {},
-        },
-      ],
-    },
-    {
-      background: theme[Math.floor(Math.random() * theme.length)],
-      type: "Image with Text",
-      assets: [
-        {
-          type: "image",
-          url: PLACEHOLDER,
-          style: {},
+          background: theme[Math.floor(Math.random() * theme.length)],
+          type: "Plain Image",
+          assets: [
+            {
+              type: "image",
+              url: PLACEHOLDER,
+              style: {},
+            },
+          ],
         },
         {
-          type: "string",
-          str: "sample text",
-          style: {
-            position: "absolute",
-            inset: 0,
-            display: "flex",
-            justifyItems: "center",
-            alignItems: "center",
-            fontWeight: 700,
-            color: "#ffffff",
-          },
+          background: theme[Math.floor(Math.random() * theme.length)],
+          type: "Image with Text",
+          assets: [
+            {
+              type: "image",
+              url: PLACEHOLDER,
+              style: {},
+            },
+            {
+              type: "string",
+              str: "sample text",
+              style: {
+                position: "absolute",
+                inset: 0,
+                display: "flex",
+                justifyItems: "center",
+                alignItems: "center",
+                fontWeight: 700,
+                color: "#ffffff",
+              },
+            },
+          ],
         },
-      ],
-    },
-  ] as TileInterface[];
+      ] as TileInterface[],
+    [theme],
+  );
 
   return (
     <>

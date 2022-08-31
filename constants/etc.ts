@@ -29,4 +29,4 @@ export interface SolvedacResponse {
   profileImageUrl: string;
 }
 
-export const PLACEHOLDER = "https://freepikpsd.com/file/2019/10/placeholder-image-png-5-Transparent-Images.png";
+export const PLACEHOLDER = "https://mivatek.global/wp-content/uploads/2021/07/placeholder.png";

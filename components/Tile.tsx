@@ -33,6 +33,7 @@ import AddGridItem from "./AddGridItem";
 import { useAuth } from "hooks/useAuthContext";
 import { useDropzone } from "react-dropzone";
 import { IconType as ReactIconType } from "react-icons";
+import { throttle } from "throttle-debounce";
 
 const getMinColumn = (length: number, floor: number, ceil: number) => {
   if (Math.ceil(length / floor) * floor >= Math.ceil(length / ceil) * ceil) return ceil;
@@ -58,6 +59,99 @@ const ConstantItem = ({ type, str }: { type: "github" | "solvedac"; str: string 
     default:
       return null;
   }
+};
+
+const ListStringItem = ({
+  isUIList,
+  item,
+  id,
+  index,
+  itemIndex,
+}: {
+  isUIList: boolean;
+  item: any;
+  id: string;
+  index: number;
+  itemIndex: number;
+}) => {
+  const { uiMode } = useUI();
+  const [isFocused, setIsFocused] = useState(false);
+  const [value, setValue] = useState("");
+  const { setTiles } = useTile();
+  const textRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (typeof item === "string") setValue(item);
+  }, []);
+
+  return (
+    <>
+      <div
+        contentEditable={uiMode && typeof item === "string" && !isUIList}
+        suppressContentEditableWarning
+        className="w-full outline-none"
+        onFocus={() => setIsFocused(true)}
+        ref={textRef}
+        onBlur={() =>
+          setTiles((tiles) =>
+            tiles.map((tile) => {
+              if (tile.i === id) {
+                return {
+                  ...tile,
+                  assets: tile.assets.map((asset, i) => {
+                    if (i === index && asset.type === "list")
+                      return {
+                        ...asset,
+                        items: asset.items.map((item, ii) => {
+                          if (ii === itemIndex) return textRef.current!.innerText;
+                          return item;
+                        }),
+                      };
+                    return asset;
+                  }),
+                };
+              }
+              return tile;
+            }),
+          )
+        }
+        onInput={() => {
+          console.log(textRef.current!.innerText);
+          setValue(textRef.current!.innerText);
+          //@ts-ignore
+          throttle(1000, () =>
+            setTiles((tiles) =>
+              tiles.map((tile) => {
+                if (tile.i === id) {
+                  return {
+                    ...tile,
+                    assets: tile.assets.map((asset, i) => {
+                      if (i === index && asset.type === "list")
+                        return {
+                          ...asset,
+                          items: asset.items.map((item, ii) => {
+                            if (ii === itemIndex) return textRef.current!.innerText;
+                            return item;
+                          }),
+                        };
+                      return asset;
+                    }),
+                  };
+                }
+                return tile;
+              }),
+            ),
+          );
+        }}
+      >
+        {item}
+      </div>
+
+      <AnimatePresence>
+        {isFocused && <StyleFloat type="string" close={() => setIsFocused(false)} id={id} index={index} />}
+      </AnimatePresence>
+    </>
+  );
 };
 
 const TileIcon = ({
@@ -195,14 +289,13 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
             ])}
             contentEditable={uiMode && !isUIList}
             suppressContentEditableWarning
-            onChange={() => {
-              setValue(textRef.current!.innerText);
+            onBlur={() =>
               setTiles((tiles) =>
                 tiles.map((tile) => {
                   if (tile.i === id) {
                     return {
                       ...tile,
-                      assets: (tile.assets as StringType[]).map((asset, i) => {
+                      assets: tile.assets.map((asset, i) => {
                         if (i === index) return { ...asset, str: textRef.current!.innerText };
                         return asset;
                       }),
@@ -210,6 +303,25 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
                   }
                   return tile;
                 }),
+              )
+            }
+            onInput={() => {
+              setValue(textRef.current!.innerText);
+              throttle(1000, () =>
+                setTiles((tiles) =>
+                  tiles.map((tile) => {
+                    if (tile.i === id) {
+                      return {
+                        ...tile,
+                        assets: tile.assets.map((asset, i) => {
+                          if (i === index) return { ...asset, str: textRef.current!.innerText };
+                          return asset;
+                        }),
+                      };
+                    }
+                    return tile;
+                  }),
+                ),
               );
             }}
             ref={textRef}
@@ -244,7 +356,7 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
           key={"list" + index}
           style={asset.style}
         >
-          <ul className="pl-8 pr-1 overflow-auto mr-1 mb-1 [list-style-type:inherit]" ref={ulRef}>
+          <ul className="pl-8 pr-1 mr-1 mb-1 [list-style-type:inherit]" ref={ulRef}>
             {asset.items.map((item, itemIndex) => (
               <li
                 key={itemIndex}
@@ -258,14 +370,7 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
                   !uiMode && asset.link && window.open(asset.link);
                 }}
               >
-                <div
-                  contentEditable={uiMode && typeof item === "string" && !isUIList}
-                  suppressContentEditableWarning
-                  className="w-full outline-none"
-                  onFocus={() => setIsFocused(true)}
-                >
-                  {item}
-                </div>
+                {<ListStringItem isUIList={isUIList} item={item} id={id} index={index} itemIndex={itemIndex} />}
                 {uiMode && !isUIList && (
                   <button
                     className="absolute top-0 right-1"
@@ -319,10 +424,6 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
                 </button>
               </div>
             )}
-
-            <AnimatePresence>
-              {isFocused && <StyleFloat type="string" close={() => setIsFocused(false)} id={id} index={index} />}
-            </AnimatePresence>
           </ul>
         </div>
       );

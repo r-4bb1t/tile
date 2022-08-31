@@ -5,11 +5,9 @@ import { useUI } from "hooks/useUIContext";
 import { useCallback, useEffect, useState } from "react";
 
 export default function Header() {
-  const { uiMode, setUIMode } = useUI();
+  const { uiMode, setUIMode, borderRadius, theme, shadow, backdropFilter } = useUI();
   const { tiles } = useTile();
   const { push } = useAlert();
-  const [autosave, setAutosave] = useState(false);
-  const [autosaveInterval, setAutosaveInterval] = useState(null as NodeJS.Timer | null);
 
   const toggleUIMode = useCallback(() => {
     if (uiMode) {
@@ -30,51 +28,26 @@ export default function Header() {
   }, [uiMode]);
 
   const save = () => {
-    localStorage.setItem(
-      "data",
-      JSON.stringify({
-        /*      tiles: tiles.map((tile) => {
-          return {
-            ...tile,
-            assets: tile.assets.map((asset) => {
-              if ("item" in asset) return { ...asset, item: asset.item.innerHTML };
-              if ("items" in asset)
-                return {
-                  ...asset,
-                  items: asset.items.map((item) => {
-                    if (typeof item === "string") {
-                      return item;
-                    } else if (item.type === "constant") {
-
-                    } else return item;
-                  }),
-                };
-              return { ...asset };
-            }),
-          };
-        }), */
-        tiles,
-        autosave,
-      }),
-    );
-    push({ type: "success", message: "Saved!" });
-  };
-
-  useEffect(() => {
-    if (autosave) setAutosaveInterval(setInterval(save, 6000000));
-    else {
-      clearInterval(autosaveInterval!);
-      setAutosaveInterval(null);
+    try {
+      localStorage.setItem(
+        "data",
+        JSON.stringify({
+          tiles,
+          borderRadius,
+          theme,
+          backdropFilter,
+          shadow,
+        }),
+      );
+      push({ type: "success", message: "Saved!" });
+    } catch (e) {
+      push({ type: "error", message: "Save Failed." });
     }
-  }, [autosave]);
+  };
 
   useEffect(() => {
     toggleUIMode();
   }, [toggleUIMode, uiMode]);
-
-  useEffect(() => {
-    if (localStorage.getItem("data")) setAutosave(JSON.parse(localStorage.getItem("data")!).autosave ?? true);
-  }, []);
 
   return (
     <div className="w-full px-8 h-16 fixed z-[100] bg-white inset-x-0 top-0 flex justify-between items-center font-semibold text-slate-500 border-b-slate-200 border-b-[1px]">
@@ -82,15 +55,6 @@ export default function Header() {
         <label className="flex items-center gap-2">
           UI MODE
           <input type="checkbox" className="toggle border-2" checked={uiMode} onChange={() => setUIMode((s) => !s)} />
-        </label>
-        <label className="flex items-center gap-2">
-          AUTO SAVE
-          <input
-            type="checkbox"
-            className="toggle border-2"
-            checked={autosave}
-            onChange={() => setAutosave((s) => !s)}
-          />
         </label>
       </div>
       <div className="flex items-center gap-4">

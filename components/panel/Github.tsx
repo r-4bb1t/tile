@@ -6,64 +6,69 @@ import { TileInterface } from "constants/tile";
 import { useAuth } from "hooks/useAuthContext";
 import { signIn } from "next-auth/react";
 import { GithubIconColored } from "components/Icons";
+import { useMemo } from "react";
 
 export default function Github() {
   const { addTile } = useTile();
   const { theme } = useUI();
   const { session } = useAuth();
 
-  const ItemList = [
-    {
-      background: theme[Math.floor(Math.random() * theme.length)],
-      type: "Github Commits",
-      maxH: 1,
-      assets: [
+  const ItemList = useMemo(
+    () =>
+      [
         {
-          type: "constant",
-          item: "github",
-          str: `@${session?.user?.name || "-"}`,
+          background: theme[Math.floor(Math.random() * theme.length)],
+          type: "Github Commits",
+          maxH: 1,
+          assets: [
+            {
+              type: "constant",
+              item: "github",
+              str: `@${session?.user?.name || "-"}`,
+            },
+            {
+              type: "commit",
+              id: session?.user?.name || "r-4bb1t",
+              style: {},
+            },
+          ],
         },
         {
-          type: "commit",
-          id: session?.user?.name || "r-4bb1t",
-          style: {},
-        },
-      ],
-    },
-    {
-      background: theme[Math.floor(Math.random() * theme.length)],
-      type: "Github Commits (green)",
-      maxH: 1,
-      assets: [
-        {
-          type: "constant",
-          item: "github",
-          str: `@${session?.user?.name || "-"}`,
-        },
-        {
-          type: "commit",
-          id: session?.user?.name || "r-4bb1t",
-          style: { backgroundColor: "#59c423" },
-        },
-      ],
-    },
-    {
-      background: theme[Math.floor(Math.random() * theme.length)],
-      type: "Github Commits (black)",
-      maxH: 1,
-      assets: [
-        {
-          type: "constant",
-          item: "github",
+          background: theme[Math.floor(Math.random() * theme.length)],
+          type: "Github Commits (green)",
+          maxH: 1,
+          assets: [
+            {
+              type: "constant",
+              item: "github",
+              str: `@${session?.user?.name || "-"}`,
+            },
+            {
+              type: "commit",
+              id: session?.user?.name || "r-4bb1t",
+              style: { backgroundColor: "#59c423" },
+            },
+          ],
         },
         {
-          type: "commit",
-          id: session?.user?.name || "r-4bb1t",
-          style: { backgroundColor: "black" },
+          background: theme[Math.floor(Math.random() * theme.length)],
+          type: "Github Commits (black)",
+          maxH: 1,
+          assets: [
+            {
+              type: "constant",
+              item: "github",
+            },
+            {
+              type: "commit",
+              id: session?.user?.name || "r-4bb1t",
+              style: { backgroundColor: "black" },
+            },
+          ],
         },
-      ],
-    },
-  ] as TileInterface[];
+      ] as TileInterface[],
+    [theme, session],
+  );
 
   return (
     <>
