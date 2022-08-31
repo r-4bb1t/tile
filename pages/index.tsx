@@ -24,7 +24,7 @@ const Home: NextPage = () => {
       <Header />
 
       <div className="flex w-full h-full flex-1 items-center">
-        <div className="flex flex-col w-full h-full justify-center items-center overflow-visible flex-[2]">
+        <div className="flex flex-col w-full h-full justify-center items-center overflow-visible flex-[2] py-20">
           {winReady && (
             <GridLayout
               layout={tiles}
