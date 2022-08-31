@@ -29,4 +29,5 @@ export interface SolvedacResponse {
   profileImageUrl: string;
 }
 
-export const PLACEHOLDER = "https://mivatek.global/wp-content/uploads/2021/07/placeholder.png";
+export const PLACEHOLDER =
+  "https://user-images.githubusercontent.com/52532871/187715154-2e44e469-18f5-42ba-8152-c782cfeac896.png";
