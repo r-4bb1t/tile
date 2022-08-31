@@ -63,7 +63,7 @@ const TileContextProvider: FC = ({ children }) => {
         type: item.type,
         background: item.background,
         assets: item.assets.map((asset) => {
-          return { ...asset, style: { ...asset.style, fontFamily: asset.style.fontFamily ?? "Pretendard" } };
+          return { ...asset, style: { ...asset.style, fontFamily: asset.style?.fontFamily ?? "Pretendard" } };
         }),
       },
     ]);
