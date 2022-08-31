@@ -12,6 +12,7 @@ export default function Solvedac({
 }) {
   const [solvedac, setSolvedac] = useState(null as unknown as SolvedacResponse);
   const fetchData = useCallback(async () => {
+    if (!id) return;
     try {
       const result = (await (
         await fetch(`https://solved.ac/api/v3/user/show?handle=${id}`, {
