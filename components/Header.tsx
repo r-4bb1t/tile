@@ -4,10 +4,12 @@ import { useAuth } from "hooks/useAuthContext";
 import { useTile } from "hooks/useTileContext";
 import { useUI } from "hooks/useUIContext";
 import { useCallback, useEffect, useState } from "react";
+import { FaDownload, FaSave } from "react-icons/fa";
+import { toPng } from "html-to-image";
 
 export default function Header() {
   const { uiMode, setUIMode, borderRadius, theme, shadow, backdropFilter } = useUI();
-  const { tiles } = useTile();
+  const { tiles, tilesRef } = useTile();
   const { push } = useAlert();
   const { solvedac, session } = useAuth();
 
@@ -49,6 +51,35 @@ export default function Header() {
     }
   };
 
+  const download = useCallback(async () => {
+    await setTimeout(() => setUIMode(false), 5000);
+
+    const element = tilesRef.current;
+    if (!element) {
+      push({ type: "error", message: "Failed to download." });
+      return;
+    }
+
+    try {
+      toPng(element).then((data: string) => {
+        const link = document.createElement("a");
+
+        if (typeof link.download === "string") {
+          link.href = data;
+          link.download = "image.jpg";
+
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        } else {
+          window.open(data);
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
+
   useEffect(() => {
     toggleUIMode();
   }, [toggleUIMode, uiMode]);
@@ -62,8 +93,13 @@ export default function Header() {
         </label>
       </div>
       <div className="flex items-center gap-4">
-        <button className="btn btn-ghost" onClick={() => save()}>
+        <button className="btn btn-ghost flex items-center justify-center gap-2" onClick={() => save()}>
+          <FaSave />
           SAVE
+        </button>
+        <button className="btn btn-ghost flex items-center justify-center gap-2" onClick={() => download()}>
+          <FaDownload />
+          DOWNLOAD
         </button>
       </div>
     </div>

@@ -2508,6 +2508,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"html-to-image@npm:^1.10.6":
+  version: 1.10.6
+  resolution: "html-to-image@npm:1.10.6"
+  checksum: bf3281b9f77a0e4830c7a6d92fdf3a4cff1ca8285871b2cbcd4ac08e3e31f761d100c42c743606f897bee1e63d02a95c5df729470edd2eb4b3603ad88e409c19
+  languageName: node
+  linkType: hard
+
 "http-cache-semantics@npm:^4.0.0, http-cache-semantics@npm:^4.1.0":
   version: 4.1.0
   resolution: "http-cache-semantics@npm:4.1.0"
@@ -3492,6 +3499,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     framer-motion: ^6.2.10
+    html-to-image: ^1.10.6
     i18next: ^21.8.9
     i18next-browser-languagedetector: ^6.1.4
     i18next-http-backend: ^1.4.1

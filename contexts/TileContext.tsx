@@ -1,4 +1,4 @@
-import { createContext, Dispatch, FC, SetStateAction, useEffect, useState } from "react";
+import { createContext, Dispatch, FC, RefObject, SetStateAction, useEffect, useRef, useState } from "react";
 import { TileInterface, TileAssetType } from "constants/tile";
 import { Layout } from "react-grid-layout";
 import { useUI } from "hooks/useUIContext";
@@ -10,6 +10,7 @@ interface TileContextProps {
   removeTile: (id: string) => void;
   onLayoutChange: (newLayout: Layout[]) => void;
   setTiles: Dispatch<SetStateAction<TileInterface[]>>;
+  tilesRef: RefObject<HTMLDivElement>;
 }
 
 export const TileContext = createContext<TileContextProps>({
@@ -18,10 +19,12 @@ export const TileContext = createContext<TileContextProps>({
   removeTile: () => {},
   onLayoutChange: () => {},
   setTiles: () => {},
+  tilesRef: { current: null },
 });
 
 const TileContextProvider: FC = ({ children }) => {
   const { theme } = useUI();
+  const tilesRef = useRef<HTMLDivElement>(null);
   const [tiles, setTiles] = useState([
     {
       i: `i${new Date().getTime()}-0`,
@@ -91,7 +94,7 @@ const TileContextProvider: FC = ({ children }) => {
   }, []);
 
   return (
-    <TileContext.Provider value={{ tiles, addTile, removeTile, onLayoutChange, setTiles }}>
+    <TileContext.Provider value={{ tiles, addTile, removeTile, onLayoutChange, setTiles, tilesRef }}>
       {children}
     </TileContext.Provider>
   );

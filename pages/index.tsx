@@ -11,7 +11,7 @@ import { useTile } from "hooks/useTileContext";
 import { useUI } from "hooks/useUIContext";
 
 const Home: NextPage = () => {
-  const { tiles, removeTile, onLayoutChange } = useTile();
+  const { tiles, removeTile, onLayoutChange, tilesRef } = useTile();
   const { uiMode, margin } = useUI();
 
   const [winReady, setwinReady] = useState(false);
@@ -45,6 +45,7 @@ const Home: NextPage = () => {
               }}
               useCSSTransforms={true}
               draggableHandle=".draggable"
+              innerRef={tilesRef}
             >
               {tiles.map((item) => (
                 <div key={item.i}>
