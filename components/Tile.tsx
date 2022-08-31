@@ -149,7 +149,7 @@ const ListStringItem = ({
       </div>
 
       <AnimatePresence>
-        {isFocused && <StyleFloat type="string" close={() => setIsFocused(false)} id={id} index={index} />}
+        {isFocused && uiMode && <StyleFloat type="string" close={() => setIsFocused(false)} id={id} index={index} />}
       </AnimatePresence>
     </>
   );
@@ -167,11 +167,12 @@ const TileIcon = ({
   itemIndex: number;
 }) => {
   const [isFocused, setIsFocused] = useState(false);
+  const { uiMode } = useUI();
   return (
     <div className="flex items-center justify-center w-full h-full" onClick={() => setIsFocused(true)}>
       {children}
       <AnimatePresence>
-        {isFocused && (
+        {isFocused && uiMode && (
           <StyleFloat type="gridIcon" close={() => setIsFocused(false)} id={id} index={index} itemIndex={itemIndex} />
         )}
       </AnimatePresence>
@@ -341,7 +342,9 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
         >
           {EditableDiv}
           <AnimatePresence>
-            {isFocused && <StyleFloat type="string" close={() => setIsFocused(false)} id={id} index={index} />}
+            {isFocused && uiMode && (
+              <StyleFloat type="string" close={() => setIsFocused(false)} id={id} index={index} />
+            )}
           </AnimatePresence>
         </div>
       );
