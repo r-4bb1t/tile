@@ -623,7 +623,6 @@ const Tile = ({
       ) : (
         <div className="draggable absolute bottom-full inset-x-0 text-sm cursor-move flex justify-between px-2 py-1 text-white ui-only drop-shadow-[0_0_5px_rgba(0,0,0,0.5)] transition-all">
           <div className="flex items-center gap-2">
-            <div className="truncate">{item.type}</div>
             <div className="h-4 flex justify-center" ref={backgroundRef}>
               <button
                 className="w-4 h-4 rounded-full border-[1px] border-white"
@@ -676,6 +675,7 @@ const Tile = ({
                 )}
               </AnimatePresence>
             </div>
+            <div className="truncate">{item.type}</div>
           </div>
           <button type="button" className="" onClick={() => close()}>
             ×
