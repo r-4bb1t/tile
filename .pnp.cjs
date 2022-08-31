@@ -40,6 +40,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:17.0.14"],\
             ["@types/react-grid-layout", "npm:1.3.2"],\
             ["@types/react-resizable", "npm:3.0.2"],\
+            ["@types/throttle-debounce", "npm:5.0.0"],\
             ["autoprefixer", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:10.4.4"],\
             ["aws-sdk", "npm:2.1205.0"],\
             ["axios", "npm:0.26.1"],\
@@ -600,6 +601,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-scheduler-npm-0.16.2-ba3a7d8c68-b6b4dcfeae.zip/node_modules/@types/scheduler/",\
           "packageDependencies": [\
             ["@types/scheduler", "npm:0.16.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/throttle-debounce", [\
+        ["npm:5.0.0", {\
+          "packageLocation": "./.yarn/cache/@types-throttle-debounce-npm-5.0.0-c27fac6e7d-f0b1f62681.zip/node_modules/@types/throttle-debounce/",\
+          "packageDependencies": [\
+            ["@types/throttle-debounce", "npm:5.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4238,6 +4248,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:17.0.14"],\
             ["@types/react-grid-layout", "npm:1.3.2"],\
             ["@types/react-resizable", "npm:3.0.2"],\
+            ["@types/throttle-debounce", "npm:5.0.0"],\
             ["autoprefixer", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:10.4.4"],\
             ["aws-sdk", "npm:2.1205.0"],\
             ["axios", "npm:0.26.1"],\
