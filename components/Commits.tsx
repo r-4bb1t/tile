@@ -37,14 +37,15 @@ export default function Commits({
     }[],
   );
   const fetchCommits = useCallback(async () => {
-    const result = (await (
-      await fetch("https://api.github.com/graphql", {
-        method: "POST",
-        headers: {
-          Authorization: `bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
-        },
-        body: JSON.stringify({
-          query: `query($id: String!) {
+    try {
+      const result = (await (
+        await fetch("https://api.github.com/graphql", {
+          method: "POST",
+          headers: {
+            Authorization: `bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
+          },
+          body: JSON.stringify({
+            query: `query($id: String!) {
                 user(login: $id) {
                   contributionsCollection {
                     contributionCalendar {
@@ -60,12 +61,15 @@ export default function Commits({
                   }
                 }
               }`,
-          variables: { id },
-        }),
-      })
-    ).json()) as CommitsResponse;
+            variables: { id },
+          }),
+        })
+      ).json()) as CommitsResponse;
 
-    setCommits(result.data.user.contributionsCollection.contributionCalendar.weeks);
+      setCommits(result.data.user.contributionsCollection.contributionCalendar.weeks);
+    } catch (e) {
+      console.log(e);
+    }
   }, []);
 
   useEffect(() => {

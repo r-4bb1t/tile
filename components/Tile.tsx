@@ -6,6 +6,7 @@ import React, {
   SetStateAction,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -184,7 +185,7 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
   const { solvedac } = useAuth();
   const textRef = useRef<HTMLDivElement>(null);
   const [isFocused, setIsFocused] = useState(false);
-  const { setTiles } = useTile();
+  const { tiles, setTiles } = useTile();
   const ulRef = useRef<HTMLUListElement>(null);
   const [isGridModalOpen, setIsGridModalOpen] = useState(false);
 
@@ -233,6 +234,64 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
     if (asset.type === "string") setValue(asset.str);
   }, [asset]);
 
+  const EditableDiv = useMemo(
+    () => (
+      <div
+        className={cc([
+          "w-full h-min outline-none px-2 resize-none break-all transition-all peer pointer-events-auto",
+          uiMode && !isUIList && "bg-white bg-opacity-20 focus:bg-opacity-50",
+          !uiMode && asset.link && "cursor-pointer",
+          isUIList && "!text-xs",
+        ])}
+        contentEditable={uiMode && !isUIList}
+        suppressContentEditableWarning
+        onBlur={() =>
+          setTiles((tiles) =>
+            tiles.map((tile) => {
+              if (tile.i === id) {
+                return {
+                  ...tile,
+                  assets: tile.assets.map((asset, i) => {
+                    if (i === index) return { ...asset, str: textRef.current!.innerText };
+                    return asset;
+                  }),
+                };
+              }
+              return tile;
+            }),
+          )
+        }
+        onInput={() => {
+          setValue(textRef.current!.innerText);
+          throttle(1000, () =>
+            setTiles((tiles) =>
+              tiles.map((tile) => {
+                if (tile.i === id) {
+                  return {
+                    ...tile,
+                    assets: tile.assets.map((asset, i) => {
+                      if (i === index) return { ...asset, str: textRef.current!.innerText };
+                      return asset;
+                    }),
+                  };
+                }
+                return tile;
+              }),
+            ),
+          );
+        }}
+        ref={textRef}
+        onFocus={() => setIsFocused(true)}
+        onClick={() => {
+          !uiMode && asset.link && window.open(asset.link);
+        }}
+      >
+        {(asset as StringType).str}
+      </div>
+    ),
+    [uiMode, isUIList, asset.link, setTiles, id, index],
+  );
+
   switch (asset.type) {
     case "image":
       return (
@@ -280,58 +339,7 @@ const AssetToComponent = (asset: TileAssetType, index: number, size: number[], i
           key={"string" + index}
           style={asset.style}
         >
-          <div
-            className={cc([
-              "w-full h-min outline-none px-2 resize-none overflow-hidden transition-all peer pointer-events-auto",
-              uiMode && !isUIList && "bg-white bg-opacity-20 focus:bg-opacity-50",
-              !uiMode && asset.link && "cursor-pointer",
-              isUIList && "!text-xs",
-            ])}
-            contentEditable={uiMode && !isUIList}
-            suppressContentEditableWarning
-            onBlur={() =>
-              setTiles((tiles) =>
-                tiles.map((tile) => {
-                  if (tile.i === id) {
-                    return {
-                      ...tile,
-                      assets: tile.assets.map((asset, i) => {
-                        if (i === index) return { ...asset, str: textRef.current!.innerText };
-                        return asset;
-                      }),
-                    };
-                  }
-                  return tile;
-                }),
-              )
-            }
-            onInput={() => {
-              setValue(textRef.current!.innerText);
-              throttle(1000, () =>
-                setTiles((tiles) =>
-                  tiles.map((tile) => {
-                    if (tile.i === id) {
-                      return {
-                        ...tile,
-                        assets: tile.assets.map((asset, i) => {
-                          if (i === index) return { ...asset, str: textRef.current!.innerText };
-                          return asset;
-                        }),
-                      };
-                    }
-                    return tile;
-                  }),
-                ),
-              );
-            }}
-            ref={textRef}
-            onFocus={() => setIsFocused(true)}
-            onClick={() => {
-              !uiMode && asset.link && window.open(asset.link);
-            }}
-          >
-            {value}
-          </div>
+          {EditableDiv}
           <AnimatePresence>
             {isFocused && <StyleFloat type="string" close={() => setIsFocused(false)} id={id} index={index} />}
           </AnimatePresence>
