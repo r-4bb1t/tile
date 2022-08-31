@@ -86,37 +86,40 @@ export default function Commits({
           }}
         >
           {commits &&
-            commits
-              .slice(isUIList ? 53 - 6 : 53 - getColsBySize(size[0]), 53)
-              .reverse()
-              .map((week, ii) =>
-                week.contributionDays.map((days, i) => (
+            commits.slice(isUIList ? 53 - 6 : 53 - getColsBySize(size[0]), 53).map((week, ii) =>
+              week.contributionDays.map((days, i) => (
+                <div
+                  className={cc([
+                    "w-2 h-2 group relative flex justify-center rounded-sm bg-white bg-opacity-50",
+                    isUIList && "w-1 h-1",
+                  ])}
+                  key={ii * 10000 + i}
+                >
                   <div
-                    className={cc([
-                      "w-2 h-2 group relative flex justify-center rounded-sm bg-white bg-opacity-50",
-                      isUIList && "w-1 h-1",
-                    ])}
-                    key={ii * 10000 + i}
-                  >
-                    <div
-                      className="absolute inset-0 bg-white rounded-sm"
-                      style={{
-                        opacity: Math.min(1, Math.max(0, days.contributionCount / 10)),
-                        ...style,
-                      }}
-                    />
-                    {!isUIList && (
-                      <div className="absolute z-50 bottom-2 px-2 py-1 text-xs text-white flex flex-col items-center font-bold w-max text-center group-hover:opacity-100 opacity-0 transition-all bg-black bg-opacity-50 pointer-events-none rounded">
-                        <div className="text-2xs leading-3 font-normal">
-                          {format(new Date(new Date().getTime() - (ii * 7 + i) * 86400000), "MM-dd")}
-                        </div>
-                        {days.contributionCount}
-                        <div className="border-x-transparent border-x-4 border-t-4 border-t-black opacity-50 absolute -bottom-1 w-0 h-0" />
+                    className="absolute inset-0 bg-white rounded-sm"
+                    style={{
+                      opacity: Math.min(1, Math.max(0, days.contributionCount / 10)),
+                      ...style,
+                    }}
+                  />
+                  {!isUIList && (
+                    <div className="absolute z-50 bottom-2 px-2 py-1 text-xs text-white flex flex-col items-center font-bold w-max text-center group-hover:opacity-100 opacity-0 transition-all bg-black bg-opacity-50 pointer-events-none rounded">
+                      <div className="text-2xs leading-3 font-normal">
+                        {format(
+                          new Date(
+                            new Date().getTime() -
+                              ((getColsBySize(size[0]) - ii - 1) * 7 + new Date().getDay() - i) * 86400000,
+                          ),
+                          "MM-dd",
+                        )}
                       </div>
-                    )}
-                  </div>
-                )),
-              )}
+                      {days.contributionCount}
+                      <div className="border-x-transparent border-x-4 border-t-4 border-t-black opacity-50 absolute -bottom-1 w-0 h-0" />
+                    </div>
+                  )}
+                </div>
+              )),
+            )}
         </div>
       </div>
     </div>
