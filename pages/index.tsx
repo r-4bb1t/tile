@@ -32,7 +32,6 @@ const Home: NextPage = () => {
               onLayoutChange={onLayoutChange}
               width={(160 + margin) * 4 + margin}
               cols={4}
-              maxRows={4}
               rowHeight={160}
               margin={[margin, margin]}
               compactType="vertical"
