@@ -38,12 +38,23 @@ export default function StyleFloat({
     (type === "gridIcon" ? getGridIconColor() : getTileAttribute("color")) ?? "black",
   );
 
+  useEffect(() => {
+    const asset = tiles.filter((tile) => tile.i === id)[0].assets[index];
+    if (type === "string" && asset.link) {
+      setLink(asset.link!);
+    }
+    if (type === "gridIcon" && (asset as GridType).items[itemIndex!].link) {
+      setLink((asset as GridType).items[itemIndex!].link!);
+    }
+  }, []);
+
   const normalizedLink = (s: string) => {
     if (!link.startsWith("http")) return "http://" + link;
     else return link;
   };
 
   useEffect(() => {
+    console.log(type);
     if (type === "string")
       setTiles((tiles) =>
         tiles.map((tile) => {
