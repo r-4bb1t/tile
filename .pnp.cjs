@@ -53,7 +53,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-prettier", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:8.5.0"],\
             ["eslint-plugin-prettier", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:4.0.0"],\
             ["framer-motion", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:6.2.10"],\
-            ["html-to-image", "npm:1.10.6"],\
             ["i18next", "npm:21.8.9"],\
             ["i18next-browser-languagedetector", "npm:6.1.4"],\
             ["i18next-http-backend", "npm:1.4.1"],\
@@ -3144,15 +3143,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["html-to-image", [\
-        ["npm:1.10.6", {\
-          "packageLocation": "./.yarn/cache/html-to-image-npm-1.10.6-bd200ab0f7-bf3281b9f7.zip/node_modules/html-to-image/",\
-          "packageDependencies": [\
-            ["html-to-image", "npm:1.10.6"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["http-cache-semantics", [\
         ["npm:4.1.0", {\
           "packageLocation": "./.yarn/cache/http-cache-semantics-npm-4.1.0-860520a31f-974de94a81.zip/node_modules/http-cache-semantics/",\
@@ -4271,7 +4261,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-prettier", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:8.5.0"],\
             ["eslint-plugin-prettier", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:4.0.0"],\
             ["framer-motion", "virtual:0e1b6f9f9a6db04980e22d19109a4fb09015b4cae9ba4901cb7380ea005dd88a42c3cd10033175c4f920b547d5ba642127377ed960a061de4ed3c4d1140b20c0#npm:6.2.10"],\
-            ["html-to-image", "npm:1.10.6"],\
             ["i18next", "npm:21.8.9"],\
             ["i18next-browser-languagedetector", "npm:6.1.4"],\
             ["i18next-http-backend", "npm:1.4.1"],\

@@ -5,6 +5,7 @@ import { useMessage } from "hooks/useMessageContext";
 import { useTile } from "hooks/useTileContext";
 import { useCallback, useEffect, useState } from "react";
 import { useAlert } from "hooks/useAlertContext";
+import { AiFillWarning } from "react-icons/ai";
 
 export default function Home() {
   const { borderRadius, setBorderRadius, theme, setTheme, backdropFilter, setBackdropFilter, shadow, setShadow } =
@@ -96,6 +97,10 @@ export default function Home() {
         ))}
       </ul>
       <div className="panel-title">Gradient</div>
+      <small className="flex items-center gap-1 font-normal -mt-4">
+        <AiFillWarning /> does not appled when printing pdf
+      </small>
+
       <ul className="flex gap-2 flex-wrap">
         {(Object.keys(BACKDROP) as BackdropList[]).map((backdrop) => (
           <div className="flex flex-col items-center" key={backdrop}>
